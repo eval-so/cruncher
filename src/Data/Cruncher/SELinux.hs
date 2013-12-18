@@ -26,7 +26,7 @@ import Data.Maybe (fromMaybe)
 import qualified Data.Text as T
 import Data.Time.Clock.POSIX
 import qualified Shelly as S
-import System.Directory (createDirectory, getTemporaryDirectory)
+import System.Directory (createDirectory, getTemporaryDirectory, removeDirectoryRecursive)
 import System.FilePath ((</>))
 import System.IO.Temp (createTempDirectory)
 
@@ -124,4 +124,5 @@ runRequest r =
       writeCode l r ws
       c <- compile l ws
       e <- execute l ws
+      removeDirectoryRecursive ws
       return $ Just (c, e)
