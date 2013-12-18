@@ -18,14 +18,14 @@ module Data.Cruncher.SELinux (
 where
 
 import Control.Applicative
-import Control.Monad
+import Control.Monad.IO.Class
 import qualified Data.ByteString.Char8 as C8
 import Data.ByteString.Base64 (decodeLenient)
 import qualified Data.Map as Map
 import Data.Maybe (fromMaybe)
 import qualified Data.Text as T
 import Data.Time.Clock.POSIX
-import Shelly hiding (FilePath, (</>))
+import qualified Shelly as S
 import System.Directory (createDirectory, getTemporaryDirectory)
 import System.FilePath ((</>))
 import System.IO.Temp (createTempDirectory)
@@ -34,12 +34,12 @@ import Data.Cruncher.Language
 import Data.Cruncher.Request (Request (..))
 import Data.Cruncher.Result (Result (..))
 
-import Data.Cruncher.Language.Everything
+import Data.Cruncher.Language.Everything (languages)
 
 -- | Determine whether SELinux is enforcing.
 isSELinuxEnforcing :: IO Bool
-isSELinuxEnforcing = shelly $ silently $ do
-  x <- T.strip <$> cmd "getenforce"
+isSELinuxEnforcing = S.shelly $ S.silently $ do
+  x <- T.strip <$> S.cmd "getenforce"
   return $ x == "Enforcing"
 
 
@@ -63,12 +63,12 @@ sandboxCommand a fp = ("timeout",
     t = T.pack $ show a
 
 runInSandbox :: [T.Text] -> Int -> FilePath -> IO Result
-runInSandbox cmd t fp = shellyNoDir $ silently $ errExit False $ do
+runInSandbox cmd t fp = S.shellyNoDir $ S.silently $ S.errExit False $ do
   startTime <- liftIO $ fmap (*1000) getPOSIXTime
-  out <- run (fromText $ fst sbc) (snd sbc ++ cmd)
+  out <- S.run (S.fromText $ fst sbc) (snd sbc ++ cmd)
   endTime <- liftIO $ fmap (*1000) getPOSIXTime
-  err <- lastStderr
-  exit <- lastExitCode
+  err <- S.lastStderr
+  exit <- S.lastExitCode
   return Result {
       stdout = out
     , stderr = err
@@ -89,8 +89,8 @@ runInSandbox cmd t fp = shellyNoDir $ silently $ errExit False $ do
 --   If there is a 'compileCommand', we run it and check its 'exitCode' field,
 --   returning the appropriate side of an 'Either' 'Result' ('Left' = non-0,
 --   'Right' = 0).
-compile :: Language -> Request -> FilePath -> IO (Maybe Result)
-compile l r fp =
+compile :: Language -> FilePath -> IO (Maybe Result)
+compile l fp =
   case compileCommand l of
     Nothing -> return Nothing
     Just c -> do
@@ -100,11 +100,9 @@ compile l r fp =
 -- | Execute something in a sandbox.
 --   TODO: Move hardcoded timeout to config or something.
 --
-execute :: Language -> Request -> FilePath -> IO Result
-execute l r fp =
+execute :: Language -> FilePath -> IO Result
+execute l fp =
   runInSandbox (runCommand l) (fromMaybe 5 (compileTimeout l)) fp
-  where
-    fn = fromMaybe (codeFilename l) (binaryFilename l)
 
 -- | Write all files (including base64'd support files) to the sandbox path.
 writeCode :: Language -> Request -> FilePath -> IO ()
@@ -124,6 +122,6 @@ runRequest r = do
     Just l -> do
       ws <- createEvalWorkspace
       writeCode l r ws
-      c <- compile l r ws
-      e <- execute l r ws
+      c <- compile l ws
+      e <- execute l ws
       return $ Just (c, e)

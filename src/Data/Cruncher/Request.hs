@@ -5,7 +5,6 @@
 
 module Data.Cruncher.Request (Request (..)) where
 
-import Control.Monad ((>>=))
 import qualified Data.ByteString.Char8 as C8
 import qualified Data.Text as T
 

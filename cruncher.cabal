@@ -38,6 +38,7 @@ library
     , temporary ==1.1.*
     , text ==0.11.*
     , time ==1.4.*
+    , transformers ==0.3.*
 
 test-suite hunit
   hs-source-dirs: tests src
@@ -56,3 +57,4 @@ test-suite hunit
     , temporary ==1.1.*
     , text ==0.11.*
     , time ==1.4.*
+    , transformers ==0.3.*
