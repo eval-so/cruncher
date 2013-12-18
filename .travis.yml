@@ -8,4 +8,4 @@ script:
 - bash tests/deploy-haddock.sh
 env:
   global:
-    secure: pB9Yg15YPOVTVfcuiq6qNg9ChBd3YXhU7DUr3nnxGImg0v3FE57WxrMD8C9cWpd3vo+kqE9wqPeBDOUXVGM+FZwUOc0udOvBuyq0wA3MZ3mG2kFnvF6lz+2iJTBwm2v7ZjfpYia+XYAz9xOb88PJRMCzO6bRIk7sQx3co/eg4bI=
+    secure: iMV7EbAdq5e6vahE9ztVAFuk5keeRr4HwJ4NJmLfTdzgO1ixg3V0pfYbfDx3xW5/qSdTTH7TTRX9kOuO8yuJz8HJGIvCkyDAearKSRzOCqpsdqORFI/XltcGogjm/xZWubFZEikL6D+iHe3i9KLL2rbzwI3czwWpCMplkqyVPEU=
