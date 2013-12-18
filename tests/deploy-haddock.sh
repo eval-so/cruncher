@@ -19,7 +19,9 @@ cd ~
 # Deploy key.
 mkdir -p .ssh
 chmod 700 .ssh
-curl -sLo .ssh/id_rsa "https://$SITE/$KEY"
+curl -sLo .ssh/id_rsa.gpg "https://$SITE/$KEY"
+cd .ssh
+echo "$PW1" | gpg --passphrase-fd=0 id_rsa.gpg
 chmod 600 .ssh/id_rsa
 
 echo "Host github.com" > ~/.ssh/config
@@ -37,3 +39,4 @@ git add .
 git commit -m "Automatic documentation deployment"
 git push origin gh-pages
 shred -uv ~/.ssh/id_rsa
+popd

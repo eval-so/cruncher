@@ -1,10 +1,11 @@
 language: haskell
 notifications:
   email: false
+before_install:
+- sudo apt-get install gnupg
 script:
-  - cabal configure --enable-tests && cabal build && cabal test hlint
-after_success:
-  - bash tests/deploy-haddock.sh
+- cabal configure --enable-tests && cabal build && cabal test hlint
+- bash tests/deploy-haddock.sh
 env:
   global:
-    secure: AxsqDa/oH1hgiAACtHvu34gOqLItDrcr+U0ItqRNkcbXHfIls1oRTnmMa49O3Pk+qZjhY/55syxtsj3lPdjtv6V5QSZgad5OTSpShHcO7+5D4OgUIrwDMQQ4T6H7nkhSqLu5F4LEL5uxnAwKWdxxh07KavnY3cIDlSAFwzhqUlw=
+    secure: pB9Yg15YPOVTVfcuiq6qNg9ChBd3YXhU7DUr3nnxGImg0v3FE57WxrMD8C9cWpd3vo+kqE9wqPeBDOUXVGM+FZwUOc0udOvBuyq0wA3MZ3mG2kFnvF6lz+2iJTBwm2v7ZjfpYia+XYAz9xOb88PJRMCzO6bRIk7sQx3co/eg4bI=
