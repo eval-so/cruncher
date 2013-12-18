@@ -101,8 +101,8 @@ compile l fp =
 --   TODO: Move hardcoded timeout to config or something.
 --
 execute :: Language -> FilePath -> IO Result
-execute l fp =
-  runInSandbox (runCommand l) (fromMaybe 5 (compileTimeout l)) fp
+execute l =
+  runInSandbox (runCommand l) (fromMaybe 5 (compileTimeout l))
 
 -- | Write all files (including base64'd support files) to the sandbox path.
 writeCode :: Language -> Request -> FilePath -> IO ()
@@ -116,8 +116,8 @@ writeCode l r fp = do
 
 -- | Perform the entire process of compilation and execution.
 runRequest :: Request -> IO (Maybe (Maybe Result, Result))
-runRequest r = do
-  case (Map.lookup (language r) languages) of
+runRequest r =
+  case Map.lookup (language r) languages of
     Nothing -> return Nothing
     Just l -> do
       ws <- createEvalWorkspace
