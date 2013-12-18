@@ -23,7 +23,7 @@ library
     Data.Cruncher.Language.Everything
     -- etc.
 
-  ghc-options: -Wall -threaded
+  ghc-options: -Wall -Werror -threaded
   hs-source-dirs: src
 
   -- other-modules:
@@ -58,3 +58,13 @@ test-suite hunit
     , text ==0.11.*
     , time ==1.4.*
     , transformers ==0.3.*
+
+
+test-suite hlint
+  hs-source-dirs: tests
+  main-is: hlint.hs
+  type: exitcode-stdio-1.0
+  ghc-options: -Wall -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      base
+    , hlint >= 1.7
