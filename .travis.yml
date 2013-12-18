@@ -3,3 +3,8 @@ notifications:
   email: false
 script:
   - cabal configure --enable-tests && cabal build && cabal test hlint
+after_success:
+  - bash tests/deploy-haddock.sh
+env:
+  global:
+    secure: AxsqDa/oH1hgiAACtHvu34gOqLItDrcr+U0ItqRNkcbXHfIls1oRTnmMa49O3Pk+qZjhY/55syxtsj3lPdjtv6V5QSZgad5OTSpShHcO7+5D4OgUIrwDMQQ4T6H7nkhSqLu5F4LEL5uxnAwKWdxxh07KavnY3cIDlSAFwzhqUlw=
