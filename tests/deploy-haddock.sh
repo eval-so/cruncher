@@ -22,6 +22,7 @@ chmod 700 .ssh
 curl -sLo .ssh/id_rsa.gpg "https://$SITE/$KEY"
 cd .ssh
 echo "$PW1" | gpg --passphrase-fd=0 id_rsa.gpg
+cd ~
 chmod 600 .ssh/id_rsa
 
 echo "Host github.com" > ~/.ssh/config
