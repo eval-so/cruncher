@@ -115,7 +115,7 @@ writeCode l r fp = do
       return ()
 
 -- | Perform the entire process of compilation and execution.
-runRequest :: Request -> IO (Maybe (Maybe Result, Result))
+runRequest :: Request -> IO (Maybe (Maybe Result, Maybe Result))
 runRequest r =
   case Map.lookup (language r) languages of
     Nothing -> return Nothing
@@ -123,6 +123,10 @@ runRequest r =
       ws <- createEvalWorkspace
       writeCode l r ws
       c <- compile l ws
-      e <- execute l ws
+      result <- if compileOnly r
+                then return (c, Nothing)
+                else do
+                  e <- execute l ws
+                  return (c, Just e)
       removeDirectoryRecursive ws
-      return $ Just (c, e)
+      return $ Just result
