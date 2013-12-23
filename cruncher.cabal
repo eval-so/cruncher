@@ -15,12 +15,16 @@ cabal-version:       >=1.8
 library
   exposed-modules:
     Data.Cruncher.Language
+    Data.Cruncher.Language.Everything
     Data.Cruncher.Result
     Data.Cruncher.Request
     Data.Cruncher.SELinux
 
     -- Languages
-    Data.Cruncher.Language.Everything
+    Data.Cruncher.Language.C
+    Data.Cruncher.Language.CPlusPlus
+    Data.Cruncher.Language.PHP
+    Data.Cruncher.Language.Ruby
     -- etc.
 
   ghc-options: -Wall -Werror -threaded
