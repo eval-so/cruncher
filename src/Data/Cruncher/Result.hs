@@ -1,10 +1,13 @@
-{-# LANGUAGE Safe #-}
+{-# LANGUAGE OverloadedStrings, Trustworthy #-}
 -- |
 -- Maintainer  : Ricky Elrod <ricky@elrod.me>
 -- Stability   : stable
 
 module Data.Cruncher.Result (Result (..)) where
 
+import Control.Applicative
+import Control.Monad (mzero)
+import Data.Aeson hiding (Result)
 import Data.Text (Text)
 
 -- | Describes the result we get back after performing an evaluation (or
@@ -16,3 +19,22 @@ data Result = Result {
   , exitCode    :: Int
   , outputFiles :: [(String, Text)]
 } deriving (Eq, Show)
+
+instance ToJSON Result where
+  toJSON (Result stdout' stderr' wallTime' exitCode' outputFiles') = object
+    [
+      "stdout" .= stdout'
+    , "stderr" .= stderr'
+    , "wallTime" .= wallTime'
+    , "exitCode" .= exitCode'
+    , "outputFiles" .= outputFiles'
+    ]
+
+instance FromJSON Result where
+  parseJSON (Object v) = Result <$>
+                             v .: "stdout"
+                         <*> v .: "stderr"
+                         <*> v .: "wallTime"
+                         <*> v .: "exitCode"
+                         <*> v .: "outputFiles"
+  parseJSON _          = mzero

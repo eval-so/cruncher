@@ -42,6 +42,7 @@ library
     , text ==0.11.*
     , time ==1.4.*
     , transformers ==0.3.*
+    , aeson ==0.6.*
 
 test-suite hunit
   hs-source-dirs: tests src
@@ -61,7 +62,7 @@ test-suite hunit
     , text ==0.11.*
     , time ==1.4.*
     , transformers ==0.3.*
-
+    , aeson ==0.6.*
 
 test-suite hlint
   hs-source-dirs: tests
