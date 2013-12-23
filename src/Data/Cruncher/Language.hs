@@ -16,4 +16,5 @@ data Language = Language {
   , compileTimeout :: Maybe Int
   , runCommand :: [T.Text]
   , runTimeout :: Int
+  , codemirror :: String
 } deriving (Eq, Show)

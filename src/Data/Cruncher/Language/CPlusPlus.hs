@@ -13,4 +13,5 @@ cplusplus = Language {
   , compileCommand = Just ["g++", "-Wall", "program.cc"]
   , compileTimeout = Just 5
   , runCommand = ["./a.out"]
+  , codemirror = "clike"
 }

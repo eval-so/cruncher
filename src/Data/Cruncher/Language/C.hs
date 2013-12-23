@@ -13,4 +13,5 @@ c = Language {
   , compileCommand = Just ["gcc", "-Wall", "program.c"]
   , compileTimeout = Just 5
   , runCommand = ["./a.out"]
+  , codemirror = "clike"
 }

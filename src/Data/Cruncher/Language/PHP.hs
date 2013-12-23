@@ -13,4 +13,5 @@ php = Language {
   , compileCommand = Nothing
   , compileTimeout = Nothing
   , runCommand = ["php", "program.php"]
+  , codemirror = "php"
 }

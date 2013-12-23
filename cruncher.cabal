@@ -1,13 +1,12 @@
 name:                cruncher
 version:             1.0.0
 synopsis:            The eval.so compilation system, rewritten in Haskell.
--- description:
 homepage:            http://github.com/eval-so/cruncher
 license:             BSD3
 license-file:        LICENSE
 author:              Ricky Elrod <ricky@elrod.me>
 maintainer:          Ricky Elrod <ricky@elrod.me>
--- copyright:
+copyright:           2013 - Ricky Elrod
 category:            Data
 build-type:          Simple
 cabal-version:       >=1.8

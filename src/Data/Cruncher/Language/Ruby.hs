@@ -13,4 +13,5 @@ ruby = Language {
   , compileCommand = Nothing
   , compileTimeout = Nothing
   , runCommand = ["ruby", "program.rb"]
+  , codemirror = "ruby"
 }
