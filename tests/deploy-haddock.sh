@@ -7,6 +7,11 @@ pushd "$TRAVIS_BUILD_DIR"
 
 cabal haddock
 
+if [ $? -ne 0 ]; then
+  echo "Failed to build docs - Failing the build."
+  exit 1
+fi
+
 if [ $TRAVIS_PULL_REQUEST != "false" ]; then
   echo "PR: Only building haddock docs, not deploying."
   exit 0
