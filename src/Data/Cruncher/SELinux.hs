@@ -8,6 +8,9 @@
 --
 -- Right now, it is heavily coupled to Cruncher, but it could probably be made
 -- into its own little library, without much grief, if ever necessary.
+--
+-- Or we could keep it tied to Cruncher and and hope that people use and like
+-- everything that Cruncher does. ;)
 
 module Data.Cruncher.SELinux (
     isSELinuxEnforcing

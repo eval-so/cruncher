@@ -2,6 +2,9 @@
 -- |
 -- Maintainer  : Ricky Elrod <ricky@elrod.me>
 -- Stability   : probably somewhat stable
+--
+-- Handles incoming requests (usually from our Yesod frontend, but could be
+-- from anywhere).
 
 module Data.Cruncher.Request (Request (..)) where
 

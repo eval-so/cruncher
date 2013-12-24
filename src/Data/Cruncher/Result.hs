@@ -2,6 +2,10 @@
 -- |
 -- Maintainer  : Ricky Elrod <ricky@elrod.me>
 -- Stability   : stable
+--
+-- Contains data types/constructors for individual sandbox runs.
+-- For example, the compile step will produce a 'Result', which is defined in
+-- this module. The execution/evaluation step will also produce a 'Result'.
 
 module Data.Cruncher.Result (Result (..)) where
 

@@ -2,12 +2,11 @@
 -- |
 -- Maintainer  : Ricky Elrod <ricky@elrod.me>
 -- Stability   : stable
-
--- | The final result for a given request.
 --
---   This contains the 'Result' obtained from both evaluation and compilation
---   as well as any files which resulted from performing the above steps.
---   Such files should placed in @~/output/@ of the evaluation.
+-- The highest level of a response that Cruncher deals with. Contains only the
+-- final result of a sandbox run, including compilation, execution, and output
+-- files (which are base64-encoded).
+
 module Data.Cruncher.FinalResult (FinalResult (..)) where
 
 import Data.Cruncher.Result
@@ -18,6 +17,13 @@ import Data.Aeson hiding (Result)
 import Data.ByteString (ByteString)
 import Data.Map (Map)
 
+-- | The final result for a given request.
+--
+--   This contains the 'Result' obtained from both evaluation and compilation
+--   as well as any files which resulted from performing the above steps.
+--   Such files should placed in @~/output/@ of the evaluation.
+--
+--   This data type also handles error handling, in the form of types.
 data FinalResult
   = FinalResult
     {
