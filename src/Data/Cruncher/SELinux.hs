@@ -25,6 +25,7 @@ import Data.Cruncher.Request (Request (..))
 import Data.Cruncher.Result (Result (..))
 
 import Control.Applicative ((<$>))
+import Control.Monad
 import Control.Monad.IO.Class
 import qualified Data.ByteString.Char8 as C8
 import qualified Data.ByteString as BS
@@ -35,7 +36,7 @@ import Data.Maybe (fromMaybe)
 import qualified Data.Text as T
 import Data.Time.Clock.POSIX
 import qualified Shelly as S
-import System.Directory (createDirectory, getTemporaryDirectory, removeDirectoryRecursive)
+import System.Directory (createDirectory, doesDirectoryExist, getTemporaryDirectory, removeDirectoryRecursive)
 import System.FilePath ((</>))
 import System.IO.HVFS.Utils (SystemFS(..))
 import System.IO.Temp (createTempDirectory)
@@ -127,7 +128,8 @@ writeCode l r fp = do
 -- | Base64 all files in the workspace's @output/@ directory.
 base64map :: FilePath -> IO (Map String BS.ByteString)
 base64map ws = do
-  outputFiles' <- recurseDir SystemFS outputDir
+  outputFiles' <- nonDirectoryOutputs
+  print outputFiles'
   if not (any (/= outputDir) outputFiles')
     then return $ Map.fromList []
     else do
@@ -137,9 +139,15 @@ base64map ws = do
    base64file :: FilePath -> IO (String, BS.ByteString)
    base64file f = do
      bs <- encode <$> BS.readFile f
-     return (drop (length outputDir) f, bs)
+     return (drop (1 + length outputDir) f, bs)
 
+   outputDir :: FilePath
    outputDir = ws </> "output"
+
+   nonDirectoryOutputs :: IO [FilePath]
+   nonDirectoryOutputs = do
+     fs <- recurseDir SystemFS outputDir
+     filterM (fmap not . doesDirectoryExist) fs
 
 -- | Perform the entire process of compilation and execution.
 runRequest :: Request -> IO FR.FinalResult
@@ -148,13 +156,17 @@ runRequest r =
     Nothing -> return FR.NoSuchLanguage
     Just l -> do
       ws <- createEvalWorkspace
-      _ <- base64map ws
       writeCode l r ws
       c <- compile l ws
+
+      -- TODO: I suspect we can clean this logic up a lot.
       result <- if compileOnly r
-                then return $ FR.FinalResult c Nothing (Map.fromList [])
+                then do
+                  outputFiles' <- base64map ws
+                  return $ FR.FinalResult c Nothing outputFiles'
                 else do
                   e <- execute l ws
-                  return $ FR.FinalResult c (Just e) (Map.fromList [])
+                  outputFiles' <- base64map ws
+                  return $ FR.FinalResult c (Just e) outputFiles'
       removeDirectoryRecursive ws
       return result
