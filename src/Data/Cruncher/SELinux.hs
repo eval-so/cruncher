@@ -17,10 +17,19 @@ module Data.Cruncher.SELinux (
 )
 where
 
-import Control.Applicative
+
+import qualified Data.Cruncher.FinalResult as FR
+import Data.Cruncher.Language
+import Data.Cruncher.Language.Everything (languages)
+import Data.Cruncher.Request (Request (..))
+import Data.Cruncher.Result (Result (..))
+
+import Control.Applicative ((<$>))
 import Control.Monad.IO.Class
 import qualified Data.ByteString.Char8 as C8
-import Data.ByteString.Base64 (decodeLenient)
+import qualified Data.ByteString as BS
+import Data.ByteString.Base64 (decodeLenient, encode)
+import Data.Map (Map)
 import qualified Data.Map as Map
 import Data.Maybe (fromMaybe)
 import qualified Data.Text as T
@@ -28,13 +37,9 @@ import Data.Time.Clock.POSIX
 import qualified Shelly as S
 import System.Directory (createDirectory, getTemporaryDirectory, removeDirectoryRecursive)
 import System.FilePath ((</>))
+import System.IO.HVFS.Utils (SystemFS(..))
 import System.IO.Temp (createTempDirectory)
-
-import Data.Cruncher.Language
-import Data.Cruncher.Request (Request (..))
-import Data.Cruncher.Result (Result (..))
-
-import Data.Cruncher.Language.Everything (languages)
+import System.Path (recurseDir)
 
 -- | Determine whether SELinux is enforcing.
 isSELinuxEnforcing :: IO Bool
@@ -47,10 +52,16 @@ isSELinuxEnforcing = S.shelly $ S.silently $ do
 --
 --   This will use the system's default temporary directory, as decided by
 --   'getTemporaryDirectory' - usually this is @/tmp@ on Linux systems.
+--
+--   In addition to creating the home (@~/@) directory for the evaluation, it
+--   also creates a @.tmp/@ directory inside of it, in addition to an @output@
+--   directory whose files are base-64 encoded and returned in the 'outputFiles'
+--   of the 'Result'.
 createEvalWorkspace :: IO FilePath
 createEvalWorkspace = do
   ws <- getTemporaryDirectory >>= flip createTempDirectory "eval-"
   createDirectory $ ws </> ".tmp"
+  createDirectory $ ws </> "output"
   return ws
 
 -- | Construct a sandbox command for a language.
@@ -74,7 +85,6 @@ runInSandbox cmd t fp = S.shellyNoDir $ S.silently $ S.errExit False $ do
     , stderr = err
     , wallTime = read $ takeWhile (/= '.') $ show (endTime - startTime)
     , exitCode = exit
-    , outputFiles = []
   }
   where
     sbc = sandboxCommand t fp
@@ -114,19 +124,37 @@ writeCode l r fp = do
       mapM_ (\x -> writeFile (fp </> fst x) (C8.unpack . decodeLenient $ snd x)) fs
       return ()
 
+-- | Base64 all files in the workspace's @output/@ directory.
+base64map :: FilePath -> IO (Map String BS.ByteString)
+base64map ws = do
+  outputFiles' <- recurseDir SystemFS outputDir
+  if not (any (/= outputDir) outputFiles')
+    then return $ Map.fromList []
+    else do
+      encoded <- mapM base64file outputFiles'
+      return $ Map.fromList encoded
+ where
+   base64file :: FilePath -> IO (String, BS.ByteString)
+   base64file f = do
+     bs <- encode <$> BS.readFile f
+     return (drop (length outputDir) f, bs)
+
+   outputDir = ws </> "output"
+
 -- | Perform the entire process of compilation and execution.
-runRequest :: Request -> IO (Maybe (Maybe Result, Maybe Result))
+runRequest :: Request -> IO FR.FinalResult
 runRequest r =
   case Map.lookup (language r) languages of
-    Nothing -> return Nothing
+    Nothing -> return FR.NoSuchLanguage
     Just l -> do
       ws <- createEvalWorkspace
+      _ <- base64map ws
       writeCode l r ws
       c <- compile l ws
       result <- if compileOnly r
-                then return (c, Nothing)
+                then return $ FR.FinalResult c Nothing (Map.fromList [])
                 else do
                   e <- execute l ws
-                  return (c, Just e)
+                  return $ FR.FinalResult c (Just e) (Map.fromList [])
       removeDirectoryRecursive ws
-      return $ Just result
+      return result

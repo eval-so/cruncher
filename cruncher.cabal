@@ -13,6 +13,7 @@ cabal-version:       >=1.8
 
 library
   exposed-modules:
+    Data.Cruncher.FinalResult
     Data.Cruncher.Language
     Data.Cruncher.Language.Everything
     Data.Cruncher.Result
@@ -43,6 +44,7 @@ library
     , time ==1.4.*
     , transformers ==0.3.*
     , aeson ==0.6.*
+    , MissingH ==1.2.*
 
 test-suite hunit
   hs-source-dirs: tests src
@@ -63,6 +65,7 @@ test-suite hunit
     , time ==1.4.*
     , transformers ==0.3.*
     , aeson ==0.6.*
+    , MissingH ==1.2.*
 
 test-suite hlint
   hs-source-dirs: tests

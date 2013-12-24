@@ -17,17 +17,15 @@ data Result = Result {
   , stderr      :: Text
   , wallTime    :: Int
   , exitCode    :: Int
-  , outputFiles :: [(String, Text)]
 } deriving (Eq, Show)
 
 instance ToJSON Result where
-  toJSON (Result stdout' stderr' wallTime' exitCode' outputFiles') = object
+  toJSON (Result stdout' stderr' wallTime' exitCode') = object
     [
-      "stdout" .= stdout'
-    , "stderr" .= stderr'
-    , "wallTime" .= wallTime'
-    , "exitCode" .= exitCode'
-    , "outputFiles" .= outputFiles'
+      "stdout"      .= stdout'
+    , "stderr"      .= stderr'
+    , "wallTime"    .= wallTime'
+    , "exitCode"    .= exitCode'
     ]
 
 instance FromJSON Result where
@@ -36,5 +34,4 @@ instance FromJSON Result where
                          <*> v .: "stderr"
                          <*> v .: "wallTime"
                          <*> v .: "exitCode"
-                         <*> v .: "outputFiles"
   parseJSON _          = mzero
