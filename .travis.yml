@@ -6,6 +6,7 @@ before_install:
 - sudo apt-get install gnupg
 script:
 - cabal configure --enable-tests && cabal build && cabal test hlint
+after_success:
 - bash tests/deploy-haddock.sh
 env:
   global:
