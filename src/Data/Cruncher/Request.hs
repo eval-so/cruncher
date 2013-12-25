@@ -28,7 +28,7 @@ instance FromJSON Request where
   parseJSON (Object v) = Request <$>
                              v .: "language"
                          <*> v .: "code"
-                         <*> v .: "inputFiles"
+                         <*> v .:? "inputFiles"
                          <*> v .: "compiltionOnly"
-                         <*> v .: "stdin"
+                         <*> v .:? "stdin"
   parseJSON _          = mzero
