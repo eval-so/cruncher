@@ -19,6 +19,7 @@ library
     Data.Cruncher.Result
     Data.Cruncher.Request
     Data.Cruncher.SELinux
+    Data.Cruncher.Unsandboxed
 
     -- Languages
     Data.Cruncher.Language.C
