@@ -9,5 +9,5 @@ import qualified Data.Text as T
 import qualified Shelly as S
 
 version :: Language -> IO T.Text
-version l = S.shelly $ S.silently $ do
+version l = S.shelly $ S.silently $
   T.strip <$> S.run "rpm" ["-qv", T.pack (rpm l)]
