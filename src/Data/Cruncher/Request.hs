@@ -1,4 +1,4 @@
-{-# LANGUAGE Safe #-}
+{-# LANGUAGE OverloadedStrings, Trustworthy #-}
 -- |
 -- Maintainer  : Ricky Elrod <ricky@elrod.me>
 -- Stability   : probably somewhat stable
@@ -8,6 +8,9 @@
 
 module Data.Cruncher.Request (Request (..)) where
 
+import Control.Applicative
+import Control.Monad (mzero)
+import Data.Aeson hiding (Result)
 import qualified Data.ByteString.Char8 as C8
 import qualified Data.Text as T
 
@@ -20,3 +23,12 @@ data Request = Request {
   , compileOnly :: Bool
   , stdin       :: Maybe T.Text
 } deriving (Eq, Show)
+
+instance FromJSON Request where
+  parseJSON (Object v) = Request <$>
+                             v .: "language"
+                         <*> v .: "code"
+                         <*> v .: "inputFiles"
+                         <*> v .: "compiltionOnly"
+                         <*> v .: "stdin"
+  parseJSON _          = mzero
