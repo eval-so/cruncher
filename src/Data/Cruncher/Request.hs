@@ -29,6 +29,6 @@ instance FromJSON Request where
                              v .:  "language"
                          <*> v .:  "code"
                          <*> v .:? "inputFiles"
-                         <*> v .:  "compilationOnly"
+                         <*> v .:? "compilationOnly" .!= False
                          <*> v .:? "stdin"
   parseJSON _          = mzero
