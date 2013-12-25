@@ -132,7 +132,6 @@ writeCode l r fp = do
 base64map :: FilePath -> IO (Map String BS.ByteString)
 base64map ws = do
   outputFiles' <- nonDirectoryOutputs
-  print outputFiles'
   if not (any (/= outputDir) outputFiles')
     then return $ Map.fromList []
     else do
