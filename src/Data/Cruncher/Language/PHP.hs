@@ -6,12 +6,12 @@ import Data.Cruncher.Language (Language (..))
 
 php :: Language
 php = Language {
-    runTimeout = 5
-  , extension = "php"
-  , codeFilename = "program.php"
-  , binaryFilename = Nothing
+    codeFilename = "program.php"
   , compileCommand = Nothing
   , compileTimeout = Nothing
   , runCommand = ["php", "program.php"]
+  , runTimeout = 5
   , codemirror = "php"
+  , rpm = "php"
+  , displayName = "PHP"
 }

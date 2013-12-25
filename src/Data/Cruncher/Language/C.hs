@@ -6,12 +6,12 @@ import Data.Cruncher.Language (Language (..))
 
 c :: Language
 c = Language {
-    runTimeout = 5
-  , extension = "c"
-  , codeFilename = "program.c"
-  , binaryFilename = Just "a.out"
+    codeFilename = "program.c"
   , compileCommand = Just ["gcc", "-Wall", "program.c"]
-  , compileTimeout = Just 5
+  , compileTimeout = Just 3
   , runCommand = ["./a.out"]
+  , runTimeout = 5
   , codemirror = "clike"
+  , rpm = "gcc"
+  , displayName = "C"
 }

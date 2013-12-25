@@ -6,12 +6,12 @@ import Data.Cruncher.Language (Language (..))
 
 cplusplus :: Language
 cplusplus = Language {
-    runTimeout = 5
-  , extension = "cc"
-  , codeFilename = "program.cc"
-  , binaryFilename = Just "a.out"
+    codeFilename = "program.cc"
   , compileCommand = Just ["g++", "-Wall", "program.cc"]
-  , compileTimeout = Just 5
+  , compileTimeout = Just 3
   , runCommand = ["./a.out"]
+  , runTimeout = 5
   , codemirror = "clike"
+  , rpm = "gcc-c++"
+  , displayName = "C++"
 }

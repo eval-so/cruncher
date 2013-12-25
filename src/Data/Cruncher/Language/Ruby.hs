@@ -6,12 +6,12 @@ import Data.Cruncher.Language (Language (..))
 
 ruby :: Language
 ruby = Language {
-    runTimeout = 5
-  , extension = "rb"
-  , codeFilename = "program.rb"
-  , binaryFilename = Nothing
+    codeFilename = "program.rb"
   , compileCommand = Nothing
   , compileTimeout = Nothing
   , runCommand = ["ruby", "program.rb"]
+  , runTimeout = 5
   , codemirror = "ruby"
+  , rpm = "ruby"
+  , displayName = "Ruby"
 }
