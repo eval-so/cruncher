@@ -74,9 +74,10 @@ sandboxCommand a fp = ("timeout",
   where
     t = T.pack $ show a
 
-runInSandbox :: [T.Text] -> Int -> FilePath -> IO Result
-runInSandbox cmd t fp = S.shellyNoDir $ S.silently $ S.errExit False $ do
+runInSandbox :: [T.Text] -> Int -> Maybe T.Text -> FilePath -> IO Result
+runInSandbox cmd t stdin' fp = S.shellyNoDir $ S.silently $ S.errExit False $ do
   startTime <- liftIO $ fmap (*1000) getPOSIXTime
+  S.setStdin (fromMaybe "" stdin')
   out <- S.run (S.fromText $ fst sbc) (snd sbc ++ cmd)
   endTime <- liftIO $ fmap (*1000) getPOSIXTime
   err <- S.lastStderr
@@ -105,13 +106,13 @@ compile l fp =
   case compileCommand l of
     Nothing -> return Nothing
     Just c -> do
-      result <- runInSandbox c (fromMaybe 5 (compileTimeout l)) fp
+      result <- runInSandbox c (fromMaybe 5 (compileTimeout l)) Nothing fp
       return $ Just result
 
 -- | Execute something in a sandbox.
 --   TODO: Move hardcoded timeout to config or something.
 --
-execute :: Language -> FilePath -> IO Result
+execute :: Language -> Maybe T.Text -> FilePath -> IO Result
 execute l =
   runInSandbox (runCommand l) (fromMaybe 5 (compileTimeout l))
 
@@ -164,7 +165,7 @@ runRequest r =
                   outputFiles' <- base64map ws
                   return $ FR.FinalResult c Nothing outputFiles'
                 else do
-                  e <- execute l ws
+                  e <- execute l (stdin r) ws
                   outputFiles' <- base64map ws
                   return $ FR.FinalResult c (Just e) outputFiles'
       removeDirectoryRecursive ws
