@@ -14,8 +14,15 @@ import qualified Data.Map as Map
 import Data.Cruncher.Language (Language (..))
 
 -- Language imports here.
+import Data.Cruncher.Language.Bash as L
 import Data.Cruncher.Language.C as L
+import Data.Cruncher.Language.ChickenScheme as L
 import Data.Cruncher.Language.CPlusPlus as L
+import Data.Cruncher.Language.Clojure as L
+import Data.Cruncher.Language.CSharp as L
+import Data.Cruncher.Language.Elixir as L
+import Data.Cruncher.Language.Factor as L
+import Data.Cruncher.Language.FSharp as L
 import Data.Cruncher.Language.PHP as L
 import Data.Cruncher.Language.Ruby as L
 
@@ -26,8 +33,15 @@ import Data.Cruncher.Language.Ruby as L
 languages :: Map String Language
 languages = Map.fromList
   [
-    ("c++", cplusplus)
+    ("bash", bash)
+  , ("c++", cplusplus)
   , ("c", c)
+  , ("chickenscheme", chickenscheme)
+  , ("clojure", clojure)
+  , ("csharp", csharp)
+  , ("elixir", elixir)
+  , ("factor", factor)
+  , ("fsharp", fsharp)
   , ("php", php)
   , ("ruby", ruby)
   ]
