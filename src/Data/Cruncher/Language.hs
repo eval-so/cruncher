@@ -1,10 +1,11 @@
-{-# LANGUAGE Safe #-}
+{-# LANGUAGE OverloadedStrings, Trustworthy #-}
 -- |
 -- Maintainer  : Ricky Elrod <ricky@elrod.me>
 -- Stability   : experimental
 
 module Data.Cruncher.Language (Language (..)) where
 
+import Data.Aeson hiding (Result)
 import qualified Data.Text as T
 
 -- | Describes what a programming language looks like internally.
@@ -18,3 +19,16 @@ data Language = Language {
   , rpm :: String -- ^ Which RPM provides this? Used for summary/version only.
   , displayName :: String -- ^ How should this language be displayed in UIs?
 } deriving (Eq, Show)
+
+instance ToJSON Language where
+  toJSON (Language codeFilename' compileCommand' compileTimeout' runCommand' runTimeout' codemirror' rpm' displayName') = object
+    [
+      "codeFilename"   .= codeFilename'
+    , "compileCommand" .= compileCommand'
+    , "compileTimeout" .= compileTimeout'
+    , "runCommand"     .= runCommand'
+    , "runTimeout"     .= runTimeout'
+    , "codemirror"     .= codemirror'
+    , "rpm"            .= rpm'
+    , "displayName"    .= displayName'
+    ]
