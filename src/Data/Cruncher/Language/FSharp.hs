@@ -11,7 +11,7 @@ fsharp = Language {
   , compileTimeout = Just 8
   , runCommand = ["mono", "a.exe"]
   , runTimeout = 5
-  , codemirror = "fsharp" -- ^ TODO: Doesn't seem to exist upstream.
+  , codemirror = "fsharp" -- TODO - Doesn't seem to exist upstream.
   , rpm = "fsharp"
   , displayName = "F#"
 }

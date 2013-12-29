@@ -29,7 +29,7 @@ data FinalResult
     {
       compile     :: Maybe Result -- ^ The compilation result, if any
     , run         :: Maybe Result -- ^ The execution result, if any
-    , outputFiles :: Map String ByteString -- ^ Base64-encoded output files.
+    , outputFiles :: Map String ByteString -- ^ Base64-encoded output files
     }
   | NoSuchLanguage
   | SELinuxNotEnforcing

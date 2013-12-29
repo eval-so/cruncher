@@ -11,7 +11,7 @@ elixir = Language {
   , compileTimeout = Nothing
   , runCommand = ["elixir", "program.exs"]
   , runTimeout = 5
-  , codemirror = "elixir" -- ^ TODO: This doesn't seem to exist upstream yet.
+  , codemirror = "elixir" -- TODO - This doesn't seem to exist upstream yet.
   , rpm = "elixir"
   , displayName = "Elixir"
 }
