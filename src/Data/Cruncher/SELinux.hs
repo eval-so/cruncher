@@ -114,7 +114,7 @@ compile l fp =
 --
 execute :: Language -> Maybe T.Text -> FilePath -> IO Result
 execute l =
-  runInSandbox (runCommand l) (fromMaybe 5 (compileTimeout l))
+  runInSandbox (runCommand l) (fromMaybe 5 (runTimeout l))
 
 -- | Write all files (including base64'd support files) to the sandbox path.
 writeCode :: Language -> Request -> FilePath -> IO ()
