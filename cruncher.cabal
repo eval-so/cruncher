@@ -22,8 +22,15 @@ library
     Data.Cruncher.Unsandboxed
 
     -- Languages
+    Data.Cruncher.Language.Bash
     Data.Cruncher.Language.C
+    Data.Cruncher.Language.ChickenScheme
+    Data.Cruncher.Language.Clojure
     Data.Cruncher.Language.CPlusPlus
+    Data.Cruncher.Language.CSharp
+    Data.Cruncher.Language.Elixir
+    Data.Cruncher.Language.Factor
+    Data.Cruncher.Language.FSharp
     Data.Cruncher.Language.PHP
     Data.Cruncher.Language.Ruby
     -- etc.
@@ -39,7 +46,7 @@ library
     , containers ==0.5.*
     , directory ==1.2.*
     , filepath ==1.3.*
-    , shelly ==1.3.*
+    , shelly ==1.4.*
     , temporary ==1.1.*
     , text ==0.11.*
     , time ==1.4.*
