@@ -46,7 +46,7 @@ library
     , containers ==0.5.*
     , directory ==1.2.*
     , filepath ==1.3.*
-    , shelly ==1.4.*
+    , shelly >= 1.3
     , temporary ==1.1.*
     , text ==0.11.*
     , time ==1.4.*
