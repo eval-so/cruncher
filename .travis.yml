@@ -4,6 +4,7 @@ notifications:
 before_install:
 - sudo apt-get update
 - sudo apt-get install gnupg
+- "echo 'documentation: True' >> ~/.cabal/config"
 script:
 - cabal configure --enable-tests && cabal build && cabal test hlint
 after_success:
