@@ -3,9 +3,9 @@
 -- Maintainer  : Ricky Elrod <ricky@elrod.me>
 -- Stability   : experimental
 
-module Data.Cruncher.Language (Language (..)) where
+module Evalso.Cruncher.Language (Language (..)) where
 
-import Data.Aeson hiding (Result)
+import Data.Aeson
 import qualified Data.Text as T
 
 -- | Describes what a programming language looks like internally.

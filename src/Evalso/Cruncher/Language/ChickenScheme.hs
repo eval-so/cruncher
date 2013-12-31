@@ -1,8 +1,8 @@
 {-# LANGUAGE OverloadedStrings, Safe #-}
 
-module Data.Cruncher.Language.ChickenScheme (chickenscheme) where
+module Evalso.Cruncher.Language.ChickenScheme (chickenscheme) where
 
-import Data.Cruncher.Language (Language (..))
+import Evalso.Cruncher.Language (Language (..))
 
 chickenscheme :: Language
 chickenscheme = Language {

@@ -1,8 +1,8 @@
 {-# LANGUAGE OverloadedStrings, Safe #-}
 
-module Data.Cruncher.Language.PHP (php) where
+module Evalso.Cruncher.Language.PHP (php) where
 
-import Data.Cruncher.Language (Language (..))
+import Evalso.Cruncher.Language (Language (..))
 
 php :: Language
 php = Language {

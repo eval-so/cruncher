@@ -1,8 +1,8 @@
 {-# LANGUAGE OverloadedStrings, Safe #-}
 
-module Data.Cruncher.Language.CPlusPlus (cplusplus) where
+module Evalso.Cruncher.Language.CPlusPlus (cplusplus) where
 
-import Data.Cruncher.Language (Language (..))
+import Evalso.Cruncher.Language (Language (..))
 
 cplusplus :: Language
 cplusplus = Language {

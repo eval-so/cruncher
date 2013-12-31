@@ -1,8 +1,8 @@
 {-# LANGUAGE OverloadedStrings, Safe #-}
 
-module Data.Cruncher.Language.Ruby (ruby) where
+module Evalso.Cruncher.Language.Ruby (ruby) where
 
-import Data.Cruncher.Language (Language (..))
+import Evalso.Cruncher.Language (Language (..))
 
 ruby :: Language
 ruby = Language {

@@ -13,26 +13,23 @@ cabal-version:       >=1.8
 
 library
   exposed-modules:
-    Data.Cruncher.FinalResult
-    Data.Cruncher.Language
-    Data.Cruncher.Language.Everything
-    Data.Cruncher.Result
-    Data.Cruncher.Request
-    Data.Cruncher.SELinux
-    Data.Cruncher.Unsandboxed
+    Evalso.Cruncher.Language
+    Evalso.Cruncher.Language.Everything
+    Evalso.Cruncher.SELinux
+    Evalso.Cruncher.Unsandboxed
 
     -- Languages
-    Data.Cruncher.Language.Bash
-    Data.Cruncher.Language.C
-    Data.Cruncher.Language.ChickenScheme
-    Data.Cruncher.Language.Clojure
-    Data.Cruncher.Language.CPlusPlus
-    Data.Cruncher.Language.CSharp
-    Data.Cruncher.Language.Elixir
-    Data.Cruncher.Language.Factor
-    Data.Cruncher.Language.FSharp
-    Data.Cruncher.Language.PHP
-    Data.Cruncher.Language.Ruby
+    Evalso.Cruncher.Language.Bash
+    Evalso.Cruncher.Language.C
+    Evalso.Cruncher.Language.ChickenScheme
+    Evalso.Cruncher.Language.Clojure
+    Evalso.Cruncher.Language.CPlusPlus
+    Evalso.Cruncher.Language.CSharp
+    Evalso.Cruncher.Language.Elixir
+    Evalso.Cruncher.Language.Factor
+    Evalso.Cruncher.Language.FSharp
+    Evalso.Cruncher.Language.PHP
+    Evalso.Cruncher.Language.Ruby
     -- etc.
 
   ghc-options: -Wall -Werror -threaded
@@ -53,6 +50,7 @@ library
     , transformers ==0.3.*
     , aeson ==0.6.*
     , MissingH ==1.2.*
+    , cruncher-types
 
 test-suite hunit
   hs-source-dirs: tests src
@@ -74,6 +72,7 @@ test-suite hunit
     , transformers ==0.3.*
     , aeson ==0.6.*
     , MissingH ==1.2.*
+    , cruncher-types
 
 test-suite hlint
   hs-source-dirs: tests

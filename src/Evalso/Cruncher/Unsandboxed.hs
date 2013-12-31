@@ -1,8 +1,8 @@
 {-# LANGUAGE OverloadedStrings #-}
 
-module Data.Cruncher.Unsandboxed (version) where
+module Evalso.Cruncher.Unsandboxed (version) where
 
-import Data.Cruncher.Language (Language, rpm)
+import Evalso.Cruncher.Language (Language, rpm)
 
 import Control.Applicative
 import qualified Data.Text as T

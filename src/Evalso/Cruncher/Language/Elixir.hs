@@ -1,8 +1,8 @@
 {-# LANGUAGE OverloadedStrings, Safe #-}
 
-module Data.Cruncher.Language.Elixir (elixir) where
+module Evalso.Cruncher.Language.Elixir (elixir) where
 
-import Data.Cruncher.Language (Language (..))
+import Evalso.Cruncher.Language (Language (..))
 
 elixir :: Language
 elixir = Language {

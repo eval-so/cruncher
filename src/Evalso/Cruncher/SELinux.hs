@@ -9,7 +9,7 @@
 -- Right now, it is heavily coupled to Cruncher, but it could probably be made
 -- into its own little library, without much grief, if ever necessary.
 
-module Data.Cruncher.SELinux (
+module Evalso.Cruncher.SELinux (
     isSELinuxEnforcing
   , runInSandbox
   , compile
@@ -18,11 +18,11 @@ module Data.Cruncher.SELinux (
 where
 
 
-import qualified Data.Cruncher.FinalResult as FR
-import Data.Cruncher.Language
-import Data.Cruncher.Language.Everything (languages)
-import Data.Cruncher.Request (Request (..))
-import Data.Cruncher.Result (Result (..))
+import qualified Evalso.Cruncher.FinalResult as FR
+import Evalso.Cruncher.Language
+import Evalso.Cruncher.Language.Everything (languages)
+import Evalso.Cruncher.Request (Request (..))
+import Evalso.Cruncher.SandboxResult (SandboxResult (..))
 
 import Control.Applicative ((<$>))
 import Control.Monad
@@ -57,7 +57,7 @@ isSELinuxEnforcing = S.shelly $ S.silently $ do
 --   In addition to creating the home (@~/@) directory for the evaluation, it
 --   also creates a @.tmp/@ directory inside of it, in addition to an @output@
 --   directory whose files are base-64 encoded and returned in the 'outputFiles'
---   of the 'Result'.
+--   of the 'SandboxResult'.
 createEvalWorkspace :: IO FilePath
 createEvalWorkspace = do
   ws <- getTemporaryDirectory >>= flip createTempDirectory "eval-"
@@ -74,7 +74,7 @@ sandboxCommand a fp = ("timeout",
   where
     t = T.pack $ show a
 
-runInSandbox :: [T.Text] -> Int -> Maybe T.Text -> FilePath -> IO Result
+runInSandbox :: [T.Text] -> Int -> Maybe T.Text -> FilePath -> IO SandboxResult
 runInSandbox cmd t stdin' fp = S.shellyNoDir $ S.silently $ S.errExit False $ do
   startTime <- liftIO $ fmap (*1000) getPOSIXTime
   S.setStdin (fromMaybe "" stdin')
@@ -82,7 +82,7 @@ runInSandbox cmd t stdin' fp = S.shellyNoDir $ S.silently $ S.errExit False $ do
   endTime <- liftIO $ fmap (*1000) getPOSIXTime
   err <- S.lastStderr
   exit <- S.lastExitCode
-  return Result {
+  return SandboxResult {
       stdout = out
     , stderr = err
     , wallTime = read $ takeWhile (/= '.') $ show (endTime - startTime)
@@ -99,9 +99,9 @@ runInSandbox cmd t stdin' fp = S.shellyNoDir $ S.silently $ S.errExit False $ do
 --   effects.
 --
 --   If there is a 'compileCommand', we run it and check its 'exitCode' field,
---   returning the appropriate side of an 'Either' 'Result' ('Left' = non-0,
---   'Right' = 0).
-compile :: Language -> FilePath -> IO (Maybe Result)
+--   returning the appropriate side of an 'Either' 'SandboxResult'
+--   ('Left' = non-0, 'Right' = 0).
+compile :: Language -> FilePath -> IO (Maybe SandboxResult)
 compile l fp =
   case compileCommand l of
     Nothing -> return Nothing
@@ -112,7 +112,7 @@ compile l fp =
 -- | Execute something in a sandbox.
 --   TODO: Move hardcoded timeout to config or something.
 --
-execute :: Language -> Maybe T.Text -> FilePath -> IO Result
+execute :: Language -> Maybe T.Text -> FilePath -> IO SandboxResult
 execute l =
   runInSandbox (runCommand l) (runTimeout l)
 

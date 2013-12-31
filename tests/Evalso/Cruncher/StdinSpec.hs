@@ -1,10 +1,10 @@
 {-# LANGUAGE OverloadedStrings #-}
-module Data.Cruncher.StdinSpec where
+module Evalso.Cruncher.StdinSpec where
 
-import qualified Data.Cruncher.FinalResult as FR
-import Data.Cruncher.Request
-import Data.Cruncher.Result
-import Data.Cruncher.SELinux
+import qualified Evalso.Cruncher.FinalResult as FR
+import Evalso.Cruncher.Request
+import Evalso.Cruncher.SandboxResult
+import Evalso.Cruncher.SELinux
 
 import Test.Hspec
 

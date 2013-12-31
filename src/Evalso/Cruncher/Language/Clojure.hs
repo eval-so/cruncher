@@ -1,8 +1,8 @@
 {-# LANGUAGE OverloadedStrings, Safe #-}
 
-module Data.Cruncher.Language.Clojure (clojure) where
+module Evalso.Cruncher.Language.Clojure (clojure) where
 
-import Data.Cruncher.Language (Language (..))
+import Evalso.Cruncher.Language (Language (..))
 
 clojure :: Language
 clojure = Language {

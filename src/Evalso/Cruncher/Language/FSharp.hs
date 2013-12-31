@@ -1,8 +1,8 @@
 {-# LANGUAGE OverloadedStrings, Safe #-}
 
-module Data.Cruncher.Language.FSharp (fsharp) where
+module Evalso.Cruncher.Language.FSharp (fsharp) where
 
-import Data.Cruncher.Language (Language (..))
+import Evalso.Cruncher.Language (Language (..))
 
 fsharp :: Language
 fsharp = Language {

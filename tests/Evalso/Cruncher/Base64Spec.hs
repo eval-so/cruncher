@@ -1,9 +1,9 @@
 {-# LANGUAGE OverloadedStrings #-}
-module Data.Cruncher.Base64Spec where
+module Evalso.Cruncher.Base64Spec where
 
-import qualified Data.Cruncher.FinalResult as FR
-import Data.Cruncher.Request
-import Data.Cruncher.SELinux
+import qualified Evalso.Cruncher.FinalResult as FR
+import Evalso.Cruncher.Request
+import Evalso.Cruncher.SELinux
 
 import qualified Data.Map as Map
 import Test.Hspec

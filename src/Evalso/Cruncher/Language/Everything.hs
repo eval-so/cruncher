@@ -3,7 +3,7 @@
 -- Maintainer  : Ricky Elrod <ricky@elrod.me>
 -- Stability   : stable, changes with new languages
 
-module Data.Cruncher.Language.Everything (
+module Evalso.Cruncher.Language.Everything (
     languages
   , module L
 ) where
@@ -11,20 +11,20 @@ module Data.Cruncher.Language.Everything (
 import Data.Map (Map)
 import qualified Data.Map as Map
 
-import Data.Cruncher.Language (Language (..))
+import Evalso.Cruncher.Language (Language (..))
 
 -- Language imports here.
-import Data.Cruncher.Language.Bash as L
-import Data.Cruncher.Language.C as L
-import Data.Cruncher.Language.ChickenScheme as L
-import Data.Cruncher.Language.CPlusPlus as L
-import Data.Cruncher.Language.Clojure as L
-import Data.Cruncher.Language.CSharp as L
-import Data.Cruncher.Language.Elixir as L
-import Data.Cruncher.Language.Factor as L
-import Data.Cruncher.Language.FSharp as L
-import Data.Cruncher.Language.PHP as L
-import Data.Cruncher.Language.Ruby as L
+import Evalso.Cruncher.Language.Bash as L
+import Evalso.Cruncher.Language.C as L
+import Evalso.Cruncher.Language.ChickenScheme as L
+import Evalso.Cruncher.Language.CPlusPlus as L
+import Evalso.Cruncher.Language.Clojure as L
+import Evalso.Cruncher.Language.CSharp as L
+import Evalso.Cruncher.Language.Elixir as L
+import Evalso.Cruncher.Language.Factor as L
+import Evalso.Cruncher.Language.FSharp as L
+import Evalso.Cruncher.Language.PHP as L
+import Evalso.Cruncher.Language.Ruby as L
 
 -- | A map of languages, by name.
 --
