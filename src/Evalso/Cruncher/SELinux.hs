@@ -63,6 +63,8 @@ createEvalWorkspace = do
   ws <- getTemporaryDirectory >>= flip createTempDirectory "eval-"
   createDirectory $ ws </> ".tmp"
   createDirectory $ ws </> "output"
+  createDirectory $ ws </> "output" </> "compile"
+  createDirectory $ ws </> "output" </> "run"
   return ws
 
 -- | Construct a sandbox command for a language.
@@ -87,6 +89,7 @@ runInSandbox cmd t stdin' fp = S.shellyNoDir $ S.silently $ S.errExit False $ do
     , stderr = err
     , wallTime = read $ takeWhile (/= '.') $ show (endTime - startTime)
     , exitCode = exit
+    , outputFiles = Map.fromList []
   }
   where
     sbc = sandboxCommand t fp
@@ -126,9 +129,9 @@ writeCode l r fp = do
       mapM_ (\x -> writeFile (fp </> fst x) (C8.unpack . decodeLenient $ snd x)) fs
       return ()
 
--- | Base64 all files in the workspace's @output/@ directory.
+-- | Base64 all files in the given directory.
 base64map :: FilePath -> IO (Map String BS.ByteString)
-base64map ws = do
+base64map outputDir = do
   outputFiles' <- nonDirectoryOutputs
   if not (any (/= outputDir) outputFiles')
     then return $ Map.fromList []
@@ -140,9 +143,6 @@ base64map ws = do
    base64file f = do
      bs <- encode <$> BS.readFile f
      return (drop (1 + length outputDir) f, bs)
-
-   outputDir :: FilePath
-   outputDir = ws </> "output"
 
    nonDirectoryOutputs :: IO [FilePath]
    nonDirectoryOutputs = do
@@ -158,15 +158,19 @@ runRequest r =
       ws <- createEvalWorkspace
       writeCode l r ws
       c <- compile l ws
+      cBase64 <- base64map (ws </> "output" </> "compile")
+      let c' = c >>= attachFiles cBase64
 
       -- TODO: I suspect we can clean this logic up a lot.
       result <- if compileOnly r
-                then do
-                  outputFiles' <- base64map ws
-                  return $ FR.FinalResult c Nothing outputFiles'
+                then return $ FR.FinalResult c' Nothing
                 else do
                   e <- execute l (stdin r) ws
-                  outputFiles' <- base64map ws
-                  return $ FR.FinalResult c (Just e) outputFiles'
+                  eBase64 <- base64map (ws </> "output" </> "run")
+                  let e' = Just e >>= attachFiles eBase64
+                  return $ FR.FinalResult c' e'
       removeDirectoryRecursive ws
       return result
+  where
+    attachFiles :: Map String BS.ByteString -> SandboxResult -> Maybe SandboxResult
+    attachFiles m s = Just (s { outputFiles = m })
