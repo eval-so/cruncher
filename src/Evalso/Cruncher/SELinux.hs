@@ -27,7 +27,6 @@ import Evalso.Cruncher.SandboxResult (SandboxResult (..))
 import Control.Applicative ((<$>))
 import Control.Monad
 import Control.Monad.IO.Class
-import qualified Data.ByteString.Char8 as C8
 import qualified Data.ByteString as BS
 import Data.ByteString.Base64 (decodeLenient, encode)
 import Data.Map (Map)
@@ -121,13 +120,14 @@ execute l =
 
 -- | Write all files (including base64'd support files) to the sandbox path.
 writeCode :: Language -> Request -> FilePath -> IO ()
-writeCode l r fp = do
-  writeFile (fp </> codeFilename l) (T.unpack $ code r)
-  case files r of
-    Nothing -> return ()
-    Just fs -> do
-      mapM_ (\x -> writeFile (fp </> fst x) (C8.unpack . decodeLenient $ snd x)) fs
-      return ()
+writeCode l r fp = writeFile (fp </> codeFilename l) (T.unpack $ code r)
+
+-- | Write base64-encoded input files from the request into the workspace.
+writeInputFiles :: Request -> FilePath -> IO ()
+writeInputFiles (Request _ _ Nothing _ _) _ = return ()
+writeInputFiles (Request _ _ (Just m) _ _) ws =
+  let decoded = decodeLenient <$> m
+    in mapM_ (\(a, b) -> BS.writeFile (ws </> a) b) (Map.toList decoded)
 
 -- | Base64 all files in the given directory.
 base64map :: FilePath -> IO (Map String BS.ByteString)
@@ -157,6 +157,7 @@ runRequest r =
     Just l -> do
       ws <- createEvalWorkspace
       writeCode l r ws
+      writeInputFiles r ws
       c <- compile l ws
       cBase64 <- base64map (ws </> "output" </> "compile")
       let c' = c >>= attachFiles cBase64
