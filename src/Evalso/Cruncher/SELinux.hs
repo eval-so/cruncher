@@ -33,6 +33,7 @@ import Data.Map (Map)
 import qualified Data.Map as Map
 import Data.Maybe (fromMaybe)
 import qualified Data.Text as T
+import qualified Data.Text.Encoding as TE
 import Data.Time.Clock.POSIX
 import qualified Shelly as S
 import System.Directory (createDirectory, doesDirectoryExist, getTemporaryDirectory, removeDirectoryRecursive)
@@ -76,7 +77,7 @@ sandboxCommand a fp = ("timeout",
     t = T.pack $ show a
 
 runInSandbox :: [T.Text] -> Int -> Maybe T.Text -> FilePath -> IO SandboxResult
-runInSandbox cmd t stdin' fp = S.shellyNoDir $ S.silently $ S.errExit False $ do
+runInSandbox cmd t stdin' fp = S.shelly $ S.silently $ S.errExit False $ do
   startTime <- liftIO $ fmap (*1000) getPOSIXTime
   S.setStdin (fromMaybe "" stdin')
   out <- S.run (S.fromText $ fst sbc) (snd sbc ++ cmd)
@@ -126,23 +127,23 @@ writeCode l r fp = writeFile (fp </> codeFilename l) (T.unpack $ code r)
 writeInputFiles :: Request -> FilePath -> IO ()
 writeInputFiles (Request _ _ Nothing _ _) _ = return ()
 writeInputFiles (Request _ _ (Just m) _ _) ws =
-  let decoded = decodeLenient <$> m
+  let decoded = fmap (decodeLenient . TE.encodeUtf8) m
     in mapM_ (\(a, b) -> BS.writeFile (ws </> a) b) (Map.toList decoded)
 
 -- | Base64 all files in the given directory.
-base64map :: FilePath -> IO (Map String BS.ByteString)
+base64map :: FilePath -> IO (Map String T.Text)
 base64map outputDir = do
   outputFiles' <- nonDirectoryOutputs
   if not (any (/= outputDir) outputFiles')
     then return $ Map.fromList []
     else do
-      encoded <- mapM base64file outputFiles'
+      encoded <- mapM (base64file) outputFiles'
       return $ Map.fromList encoded
  where
-   base64file :: FilePath -> IO (String, BS.ByteString)
+   base64file :: FilePath -> IO (String, T.Text)
    base64file f = do
-     bs <- encode <$> BS.readFile f
-     return (drop (1 + length outputDir) f, bs)
+     t <- TE.decodeUtf8 . encode <$> BS.readFile f
+     return (drop (1 + length outputDir) f, t)
 
    nonDirectoryOutputs :: IO [FilePath]
    nonDirectoryOutputs = do
@@ -173,5 +174,5 @@ runRequest r =
       removeDirectoryRecursive ws
       return result
   where
-    attachFiles :: Map String BS.ByteString -> SandboxResult -> Maybe SandboxResult
+    attachFiles :: Map String T.Text -> SandboxResult -> Maybe SandboxResult
     attachFiles m s = Just (s { outputFiles = m })
