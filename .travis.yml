@@ -5,7 +5,9 @@ before_install:
 - sudo apt-get update
 - sudo apt-get install gnupg
 script:
-- cabal configure --enable-tests && cabal build && cabal test hlint
+- cabal update
+- cabal install cabal-install
+- ~/.cabal/bin/cabal configure --enable-tests && ~/.cabal/bin/cabal build && ~/.cabal/bin/cabal test hlint
 after_success:
 - bash tests/deploy-haddock.sh
 env:
