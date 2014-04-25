@@ -137,7 +137,7 @@ base64map outputDir = do
   if not (any (/= outputDir) outputFiles')
     then return $ Map.fromList []
     else do
-      encoded <- mapM (base64file) outputFiles'
+      encoded <- mapM base64file outputFiles'
       return $ Map.fromList encoded
  where
    base64file :: FilePath -> IO (String, T.Text)
