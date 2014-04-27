@@ -4,10 +4,10 @@ notifications:
 before_install:
 - sudo apt-get update
 - sudo apt-get install gnupg
-script:
 - cabal update
 - cabal install cabal-install
 - git clone git://github.com/eval-so/cruncher-types.git ../cruncher-types
+script:
 - ~/.cabal/bin/configure
 - ~/.cabal/bin/cabal install ../cruncher-types/
 - ~/.cabal/bin/cabal build && ~/.cabal/bin/cabal test hlint
