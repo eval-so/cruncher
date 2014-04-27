@@ -92,7 +92,8 @@ spec = parallel $ do
       stderr c `shouldBe` ""
 
     it "works for Go" $ do
-      finalResult <- runRequest $ Request "go" "println(\"hello, world!\")" Nothing False Nothing
+      -- Enjoy: http://rosettacode.org/wiki/Hello_world/Standard_error#Go
+      finalResult <- runRequest $ Request "go" "package main\nimport (\"fmt\"; \"os\")\nfunc main() { fmt.Fprintln(os.Stdout, \"hello world!\") }" Nothing False Nothing
       let (Just e) = FR.run finalResult
           (Just c) = FR.compile finalResult
       stdout e `shouldBe` "hello world!\n"
