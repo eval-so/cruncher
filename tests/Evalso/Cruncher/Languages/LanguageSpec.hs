@@ -118,14 +118,14 @@ spec = parallel $ do
           (Just c) = FR.compile finalResult
       stdout e `shouldBe` "hello world!\n"
       stderr c `shouldBe` ""
-
+-}
     it "works for JRuby18" $ do
-      finalResult <- runRequest $ Request "jruby18" "" Nothing False Nothing
+      finalResult <- runRequest $ Request "jruby18" "puts 'hello world!'" Nothing False Nothing
       let (Just e) = FR.run finalResult
-          (Just c) = FR.compile finalResult
+          c        = FR.compile finalResult
       stdout e `shouldBe` "hello world!\n"
-      stderr c `shouldBe` ""
-
+      c `shouldBe` Nothing
+{-
     it "works for Java" $ do
       finalResult <- runRequest $ Request "java" "" Nothing False Nothing
       let (Just e) = FR.run finalResult
@@ -139,35 +139,35 @@ spec = parallel $ do
           (Just c) = FR.compile finalResult
       stdout e `shouldBe` "hello world!\n"
       stderr c `shouldBe` ""
-
+-}
     it "works for Lua" $ do
-      finalResult <- runRequest $ Request "lua" "" Nothing False Nothing
+      finalResult <- runRequest $ Request "lua" "print 'hello world!'" Nothing False Nothing
       let (Just e) = FR.run finalResult
-          (Just c) = FR.compile finalResult
+          c        = FR.compile finalResult
       stdout e `shouldBe` "hello world!\n"
-      stderr c `shouldBe` ""
+      c `shouldBe` Nothing
 
     it "works for Perl" $ do
-      finalResult <- runRequest $ Request "perl" "" Nothing False Nothing
+      finalResult <- runRequest $ Request "perl" "print \"hello world!\n\"" Nothing False Nothing
       let (Just e) = FR.run finalResult
-          (Just c) = FR.compile finalResult
+          c        = FR.compile finalResult
       stdout e `shouldBe` "hello world!\n"
-      stderr c `shouldBe` ""
+      c `shouldBe` Nothing
 
     it "works for Perl6" $ do
-      finalResult <- runRequest $ Request "perl6" "" Nothing False Nothing
+      finalResult <- runRequest $ Request "perl6" "print \"hello world!\n\"" Nothing False Nothing
       let (Just e) = FR.run finalResult
-          (Just c) = FR.compile finalResult
+          c        = FR.compile finalResult
       stdout e `shouldBe` "hello world!\n"
-      stderr c `shouldBe` ""
+      c `shouldBe` Nothing
 
     it "works for Python2" $ do
-      finalResult <- runRequest $ Request "python2" "" Nothing False Nothing
+      finalResult <- runRequest $ Request "python2" "print 'hello world!'" Nothing False Nothing
       let (Just e) = FR.run finalResult
-          (Just c) = FR.compile finalResult
+          c        = FR.compile finalResult
       stdout e `shouldBe` "hello world!\n"
-      stderr c `shouldBe` ""
-
+      c `shouldBe` Nothing
+{-
     it "works for Rust" $ do
       finalResult <- runRequest $ Request "rust" "" Nothing False Nothing
       let (Just e) = FR.run finalResult
