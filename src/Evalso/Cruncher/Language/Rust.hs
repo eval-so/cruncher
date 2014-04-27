@@ -12,6 +12,6 @@ rust = Language {
   , runCommand = ["./a.out"]
   , runTimeout = 5
   , codemirror = "rust"
-  , rpm = nil
+  , rpm = "rust" -- TODO: Figure out if the package is actually called "rust."
   , displayName = "Rust"
 }

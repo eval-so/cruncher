@@ -12,6 +12,6 @@ perl = Language {
   , runCommand = ["perl", "program.pl"]
   , runTimeout = 5
   , codemirror = "perl"
-  , rpm = "4:perl"
+  , rpm = "perl"
   , displayName = "Perl"
 }

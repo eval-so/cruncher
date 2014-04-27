@@ -12,6 +12,6 @@ java = Language {
   , runCommand = ["java", "EvalSO"]
   , runTimeout = 5
   , codemirror = "java"
-  , rpm = nil
+  , rpm = "java"
   , displayName = "Java"
 }
