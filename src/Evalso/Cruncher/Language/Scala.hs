@@ -6,8 +6,8 @@ import Evalso.Cruncher.Language (Language (..))
 
 scala :: Language
 scala = Language {
-    codeFilename = "program.scala"
-  , compileCommand = Just ["scalac", "program.scala"]
+    codeFilename = "EvalSO.scala"
+  , compileCommand = Just ["scalac", "EvalSO.scala"]
   , compileTimeout = Just 10
   , runCommand = ["scala", "EvalSO"]
   , runTimeout = 10
