@@ -99,7 +99,7 @@ spec = parallel $ do
       stderr c `shouldBe` ""
 
     it "works for Haskell" $ do
-      finalResult <- runRequest $ Request "haskell" "putStrLn \"hello, world!\"" Nothing False Nothing
+      finalResult <- runRequest $ Request "haskell" "module Main where\nmain = putStrLn \"hello world!\"" Nothing False Nothing
       let (Just e) = FR.run finalResult
           (Just c) = FR.compile finalResult
       stdout e `shouldBe` "hello world!\n"
