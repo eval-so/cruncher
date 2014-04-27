@@ -105,14 +105,14 @@ spec = parallel $ do
           (Just c) = FR.compile finalResult
       stdout e `shouldBe` "hello world!\n"
       stderr c `shouldBe` ""
-{-
+
     it "works for Idris" $ do
       finalResult <- runRequest $ Request "idris" "module Main\nmain : IO ()\nmain = putStrLn \"hello world!\"" Nothing False Nothing
       let (Just e) = FR.run finalResult
           (Just c) = FR.compile finalResult
       stdout e `shouldBe` "hello world!\n"
       stderr c `shouldBe` ""
--}
+
     it "works for Io" $ do
       finalResult <- runRequest $ Request "io" "\"hello world!\" println" Nothing False Nothing
       let (Just e) = FR.run finalResult
@@ -154,14 +154,14 @@ spec = parallel $ do
           c        = FR.compile finalResult
       stdout e `shouldBe` "hello world!\n"
       c `shouldBe` Nothing
-
+{-
     it "works for Perl6" $ do
       finalResult <- runRequest $ Request "perl6" "print \"hello world!\n\"" Nothing False Nothing
       let (Just e) = FR.run finalResult
           c        = FR.compile finalResult
       stdout e `shouldBe` "hello world!\n"
       c `shouldBe` Nothing
-
+-}
     it "works for Python2" $ do
       finalResult <- runRequest $ Request "python2" "print 'hello world!'" Nothing False Nothing
       let (Just e) = FR.run finalResult
