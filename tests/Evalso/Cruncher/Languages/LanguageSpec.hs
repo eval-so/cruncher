@@ -128,7 +128,7 @@ spec = parallel $ do
       c `shouldBe` Nothing
 {-
     it "works for Java" $ do
-      finalResult <- runRequest $ Request "java" "public class HelloWorld { public static void main(String[] args) { System.out.println(\"hello world!\"); } }" Nothing False Nothing
+      finalResult <- runRequest $ Request "java" "public class EvalSO { public static void main(String[] args) { System.out.println(\"hello world!\"); } }" Nothing False Nothing
       let (Just e) = FR.run finalResult
           (Just c) = FR.compile finalResult
       stdout e `shouldBe` "hello world!\n"
@@ -185,7 +185,7 @@ spec = parallel $ do
       stderr c `shouldBe` ""
 
     it "works for Scala" $ do
-      finalResult <- runRequest $ Request "scala" "println(\"hello world!\")" Nothing False Nothing
+      finalResult <- runRequest $ Request "scala" "object EvalSO extends App { println(\"hello world!\") }" Nothing False Nothing
       let (Just e) = FR.run finalResult
           (Just c) = FR.compile finalResult
       stdout e `shouldBe` "hello world!\n"

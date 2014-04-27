@@ -8,7 +8,7 @@ scala :: Language
 scala = Language {
     codeFilename = "program.scala"
   , compileCommand = Just ["scalac", "program.scala"]
-  , compileTimeout = Just 3
+  , compileTimeout = Just 10
   , runCommand = ["scala", "EvalSO"]
   , runTimeout = 10
   , codemirror = "scala"
