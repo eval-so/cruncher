@@ -4,6 +4,8 @@
 
 A minibcs rewrite in Haskell.
 
+Assumes cabal >= 1.18.
+
 # License
 
 BSD-3.
