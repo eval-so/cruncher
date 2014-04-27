@@ -11,7 +11,7 @@ jruby18 = Language {
   , compileTimeout = Nothing
   , runCommand = ["jruby", "--headless", "--1.8", "program.rb"]
   , runTimeout = 10
-  , codemirror = "jruby18"
+  , codemirror = "ruby"
   , rpm = "jruby"
   , displayName = "JRuby18"
 }
