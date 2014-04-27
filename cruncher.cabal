@@ -28,8 +28,24 @@ library
     Evalso.Cruncher.Language.Elixir
     Evalso.Cruncher.Language.Factor
     Evalso.Cruncher.Language.FSharp
+    Evalso.Cruncher.Language.Go
+    Evalso.Cruncher.Language.Haskell
+    Evalso.Cruncher.Language.Idris
+    Evalso.Cruncher.Language.Io
+    Evalso.Cruncher.Language.Java
+    Evalso.Cruncher.Language.JRuby18
+    Evalso.Cruncher.Language.LOLCODE
+    Evalso.Cruncher.Language.Lua
+    Evalso.Cruncher.Language.Perl6
+    Evalso.Cruncher.Language.Perl
     Evalso.Cruncher.Language.PHP
+    Evalso.Cruncher.Language.Python2
     Evalso.Cruncher.Language.Ruby
+    Evalso.Cruncher.Language.Rust
+    Evalso.Cruncher.Language.Scala
+    Evalso.Cruncher.Language.Smalltalk
+    Evalso.Cruncher.Language.SML
+    Evalso.Cruncher.Language.VBNET
     -- etc.
 
   ghc-options: -Wall -Werror -threaded
