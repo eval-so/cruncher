@@ -133,14 +133,14 @@ spec = parallel $ do
           (Just c) = FR.compile finalResult
       stdout e `shouldBe` "hello world!\n"
       stderr c `shouldBe` ""
-
-    it "works for LOLCODE" $ do
-      finalResult <- runRequest $ Request "lolcode" "HAI\nCAN HAS STDIO?\nVISIBLE \"hello world!\"\nKTHXBYE" Nothing False Nothing
-      let (Just e) = FR.run finalResult
-          (Just c) = FR.compile finalResult
-      stdout e `shouldBe` "hello world!\n"
-      stderr c `shouldBe` ""
 -}
+    it "works for LOLCODE" $ do
+      finalResult <- runRequest $ Request "lolcode" "HAI 1.2\nCAN HAS STDIO?\nVISIBLE \"hello world!\"\nKTHXBYE" Nothing False Nothing
+      let (Just e) = FR.run finalResult
+          c        = FR.compile finalResult
+      stdout e `shouldBe` "hello world!\n"
+      c `shouldBe` Nothing
+
     it "works for Lua" $ do
       finalResult <- runRequest $ Request "lua" "print 'hello world!'" Nothing False Nothing
       let (Just e) = FR.run finalResult
