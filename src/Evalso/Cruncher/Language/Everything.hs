@@ -23,8 +23,24 @@ import Evalso.Cruncher.Language.CSharp as L
 import Evalso.Cruncher.Language.Elixir as L
 import Evalso.Cruncher.Language.Factor as L
 import Evalso.Cruncher.Language.FSharp as L
+import Evalso.Cruncher.Language.Go as L
+import Evalso.Cruncher.Language.Haskell as L
+import Evalso.Cruncher.Language.Idris as L
+import Evalso.Cruncher.Language.Io as L
+import Evalso.Cruncher.Language.Java as L
+import Evalso.Cruncher.Language.JRuby18 as L
+import Evalso.Cruncher.Language.LOLCODE as L
+import Evalso.Cruncher.Language.Lua as L
+import Evalso.Cruncher.Language.Perl6 as L
+import Evalso.Cruncher.Language.Perl as L
 import Evalso.Cruncher.Language.PHP as L
+import Evalso.Cruncher.Language.Python2 as L
 import Evalso.Cruncher.Language.Ruby as L
+import Evalso.Cruncher.Language.Rust as L
+import Evalso.Cruncher.Language.Scala as L
+import Evalso.Cruncher.Language.Smalltalk as L
+import Evalso.Cruncher.Language.SML as L
+import Evalso.Cruncher.Language.VBNET as L
 
 -- | A map of languages, by name.
 --
@@ -42,6 +58,22 @@ languages = Map.fromList
   , ("elixir", elixir)
   , ("factor", factor)
   , ("fsharp", fsharp)
+  , ("go", go)
+  , ("haskell", haskell)
+  , ("idris", idris)
+  , ("io", io)
+  , ("java", java)
+  , ("jruby18", jruby18)
+  , ("lolcode", lolcode)
+  , ("lua", lua)
+  , ("perl6", perl6)
+  , ("perl", perl)
   , ("php", php)
+  , ("python2", python2)
   , ("ruby", ruby)
+  , ("rust", rust)
+  , ("scala", scala)
+  , ("smalltalk", smalltalk)
+  , ("sml", sml)
+  , ("vbnet", vbnet)
   ]
