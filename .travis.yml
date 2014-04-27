@@ -7,7 +7,10 @@ before_install:
 script:
 - cabal update
 - cabal install cabal-install
-- ~/.cabal/bin/cabal configure --enable-tests && ~/.cabal/bin/cabal build && ~/.cabal/bin/cabal test hlint
+- git clone git://github.com/eval-so/cruncher-types.git ../cruncher-types
+- ~/.cabal/bin/configure
+- ~/.cabal/bin/cabal install ../cruncher-types/
+- ~/.cabal/bin/cabal build && ~/.cabal/bin/cabal test hlint
 after_success:
 - bash tests/deploy-haddock.sh
 env:
