@@ -13,7 +13,6 @@ cabal-version:       >=1.8
 
 library
   exposed-modules:
-    Evalso.Cruncher.Language
     Evalso.Cruncher.Language.Everything
     Evalso.Cruncher.SELinux
     Evalso.Cruncher.Unsandboxed
@@ -64,7 +63,6 @@ library
     , text >= 1.1 && < 2
     , time >= 1.4 && < 2
     , transformers >= 0.3 && < 0.4
-    , aeson >= 0.7 && < 0.9
     , MissingH >= 1.2 && < 1.4
     , cruncher-types
 
@@ -85,7 +83,6 @@ test-suite hunit
     , text >= 1.1 && < 2
     , time >= 1.4 && < 2
     , transformers >= 0.3 && < 0.4
-    , aeson >= 0.7 && < 0.9
     , MissingH >= 1.2 && < 1.4
     , cruncher-types
     , hspec >= 1.8

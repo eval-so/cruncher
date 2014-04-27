@@ -11,8 +11,8 @@ script:
 - ~/.cabal/bin/configure
 - ~/.cabal/bin/cabal install ../cruncher-types/
 - ~/.cabal/bin/cabal build && ~/.cabal/bin/cabal test hlint
-after_success:
-- bash tests/deploy-haddock.sh
-env:
-  global:
-    secure: iMV7EbAdq5e6vahE9ztVAFuk5keeRr4HwJ4NJmLfTdzgO1ixg3V0pfYbfDx3xW5/qSdTTH7TTRX9kOuO8yuJz8HJGIvCkyDAearKSRzOCqpsdqORFI/XltcGogjm/xZWubFZEikL6D+iHe3i9KLL2rbzwI3czwWpCMplkqyVPEU=
+#after_success:
+#- bash tests/deploy-haddock.sh
+#env:
+#  global:
+#    secure: iMV7EbAdq5e6vahE9ztVAFuk5keeRr4HwJ4NJmLfTdzgO1ixg3V0pfYbfDx3xW5/qSdTTH7TTRX9kOuO8yuJz8HJGIvCkyDAearKSRzOCqpsdqORFI/XltcGogjm/xZWubFZEikL6D+iHe3i9KLL2rbzwI3czwWpCMplkqyVPEU=
