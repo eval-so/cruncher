@@ -6,12 +6,12 @@ import Evalso.Cruncher.Language (Language (..))
 
 io :: Language
 io = Language {
-    codeFilename = "program.io"
-  , compileCommand = Nothing
-  , compileTimeout = Nothing
-  , runCommand = ["io", "program.io"]
-  , runTimeout = 5
-  , codemirror = "io"
-  , rpm = "Io-language"
-  , displayName = "Io"
+    _codeFilename = "program.io"
+  , _compileCommand = Nothing
+  , _compileTimeout = Nothing
+  , _runCommand = ["io", "program.io"]
+  , _runTimeout = 5
+  , _codemirror = "io"
+  , _rpm = "Io-language"
+  , _displayName = "Io"
 }

@@ -25,6 +25,7 @@ import Evalso.Cruncher.Request (Request (..))
 import Evalso.Cruncher.SandboxResult (SandboxResult (..))
 
 import Control.Applicative ((<$>))
+import Control.Lens
 import Control.Monad
 import Control.Monad.IO.Class
 import qualified Data.ByteString as BS
@@ -106,10 +107,10 @@ runInSandbox cmd t stdin' fp = S.shelly $ S.silently $ S.errExit False $ do
 --   ('Left' = non-0, 'Right' = 0).
 compile :: Language -> FilePath -> IO (Maybe SandboxResult)
 compile l fp =
-  case compileCommand l of
+  case l ^. compileCommand of
     Nothing -> return Nothing
     Just c -> do
-      result <- runInSandbox c (fromMaybe 5 (compileTimeout l)) Nothing fp
+      result <- runInSandbox c (fromMaybe 5 (l ^. compileTimeout)) Nothing fp
       return $ Just result
 
 -- | Execute something in a sandbox.
@@ -117,11 +118,11 @@ compile l fp =
 --
 execute :: Language -> Maybe T.Text -> FilePath -> IO SandboxResult
 execute l =
-  runInSandbox (runCommand l) (runTimeout l)
+  runInSandbox (l ^. runCommand) (l ^. runTimeout)
 
 -- | Write all files (including base64'd support files) to the sandbox path.
 writeCode :: Language -> Request -> FilePath -> IO ()
-writeCode l r fp = writeFile (fp </> codeFilename l) (T.unpack $ code r)
+writeCode l r fp = writeFile (fp </> l ^. codeFilename) (T.unpack $ code r)
 
 -- | Write base64-encoded input files from the request into the workspace.
 writeInputFiles :: Request -> FilePath -> IO ()

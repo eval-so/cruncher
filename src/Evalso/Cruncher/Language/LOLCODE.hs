@@ -6,12 +6,12 @@ import Evalso.Cruncher.Language (Language (..))
 
 lolcode :: Language
 lolcode = Language {
-    codeFilename = "program.lol"
-  , compileCommand = Nothing
-  , compileTimeout = Nothing
-  , runCommand = ["lci", "program.lol"]
-  , runTimeout = 5
-  , codemirror = "lolcode"
-  , rpm = "lci"
-  , displayName = "LOLCODE"
+    _codeFilename = "program.lol"
+  , _compileCommand = Nothing
+  , _compileTimeout = Nothing
+  , _runCommand = ["lci", "program.lol"]
+  , _runTimeout = 5
+  , _codemirror = "lolcode"
+  , _rpm = "lci"
+  , _displayName = "LOLCODE"
 }

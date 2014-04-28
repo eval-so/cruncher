@@ -6,12 +6,12 @@ import Evalso.Cruncher.Language (Language (..))
 
 perl6 :: Language
 perl6 = Language {
-    codeFilename = "program.pl"
-  , compileCommand = Nothing
-  , compileTimeout = Nothing
-  , runCommand = ["perl6", "program.pl"]
-  , runTimeout = 5
-  , codemirror = "perl6"
-  , rpm = "rakudo-star"
-  , displayName = "Perl6"
+    _codeFilename = "program.pl"
+  , _compileCommand = Nothing
+  , _compileTimeout = Nothing
+  , _runCommand = ["perl6", "program.pl"]
+  , _runTimeout = 5
+  , _codemirror = "perl6"
+  , _rpm = "rakudo-star"
+  , _displayName = "Perl6"
 }

@@ -6,12 +6,12 @@ import Evalso.Cruncher.Language (Language (..))
 
 elixir :: Language
 elixir = Language {
-    codeFilename = "program.exs"
-  , compileCommand = Nothing
-  , compileTimeout = Nothing
-  , runCommand = ["elixir", "program.exs"]
-  , runTimeout = 5
-  , codemirror = "elixir" -- TODO - This doesn't seem to exist upstream yet.
-  , rpm = "elixir"
-  , displayName = "Elixir"
+    _codeFilename = "program.exs"
+  , _compileCommand = Nothing
+  , _compileTimeout = Nothing
+  , _runCommand = ["elixir", "program.exs"]
+  , _runTimeout = 5
+  , _codemirror = "elixir" -- TODO - This doesn't seem to exist upstream yet.
+  , _rpm = "elixir"
+  , _displayName = "Elixir"
 }

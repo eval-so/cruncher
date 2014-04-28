@@ -6,12 +6,12 @@ import Evalso.Cruncher.Language (Language (..))
 
 rust :: Language
 rust = Language {
-    codeFilename = "program.rs"
-  , compileCommand = Just ["rust", "build", "-o", "a.out", "program.rs"]
-  , compileTimeout = Just 3
-  , runCommand = ["./a.out"]
-  , runTimeout = 5
-  , codemirror = "rust"
-  , rpm = "rust" -- TODO: Figure out if the package is actually called "rust."
-  , displayName = "Rust"
+    _codeFilename = "program.rs"
+  , _compileCommand = Just ["rust", "build", "-o", "a.out", "program.rs"]
+  , _compileTimeout = Just 3
+  , _runCommand = ["./a.out"]
+  , _runTimeout = 5
+  , _codemirror = "rust"
+  , _rpm = "rust" -- TODO: Figure out if the package is actually called "rust."
+  , _displayName = "Rust"
 }

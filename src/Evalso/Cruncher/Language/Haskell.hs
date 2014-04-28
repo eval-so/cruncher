@@ -6,12 +6,12 @@ import Evalso.Cruncher.Language (Language (..))
 
 haskell :: Language
 haskell = Language {
-    codeFilename = "program.hs"
-  , compileCommand = Just ["ghc", "program.hs"]
-  , compileTimeout = Just 3
-  , runCommand = ["./program"]
-  , runTimeout = 5
-  , codemirror = "haskell"
-  , rpm = "ghc-compiler"
-  , displayName = "Haskell"
+    _codeFilename = "program.hs"
+  , _compileCommand = Just ["ghc", "program.hs"]
+  , _compileTimeout = Just 3
+  , _runCommand = ["./program"]
+  , _runTimeout = 5
+  , _codemirror = "haskell"
+  , _rpm = "ghc-compiler"
+  , _displayName = "Haskell"
 }

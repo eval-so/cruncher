@@ -6,12 +6,12 @@ import Evalso.Cruncher.Language (Language (..))
 
 bash :: Language
 bash = Language {
-    codeFilename = "program.sh"
-  , compileCommand = Nothing
-  , compileTimeout = Nothing
-  , runCommand = ["bash", "program.sh"]
-  , runTimeout = 5
-  , codemirror = "shell"
-  , rpm = "bash"
-  , displayName = "Bash"
+    _codeFilename = "program.sh"
+  , _compileCommand = Nothing
+  , _compileTimeout = Nothing
+  , _runCommand = ["bash", "program.sh"]
+  , _runTimeout = 5
+  , _codemirror = "shell"
+  , _rpm = "bash"
+  , _displayName = "Bash"
 }

@@ -6,10 +6,10 @@ import Evalso.Cruncher.Language (Language (..))
 
 clojure :: Language
 clojure = Language {
-    codeFilename = "program.clj"
-  , compileCommand = Nothing
-  , compileTimeout = Nothing
-  , runCommand = [
+    _codeFilename = "program.clj"
+  , _compileCommand = Nothing
+  , _compileTimeout = Nothing
+  , _runCommand = [
     "java",
     "-client",
     "-XX:+TieredCompilation",
@@ -18,8 +18,8 @@ clojure = Language {
     "clojure.main",
     "program.clj"
     ]
-  , runTimeout = 10
-  , codemirror = "clojure"
-  , rpm = "clojure"
-  , displayName = "Clojure"
+  , _runTimeout = 10
+  , _codemirror = "clojure"
+  , _rpm = "clojure"
+  , _displayName = "Clojure"
 }

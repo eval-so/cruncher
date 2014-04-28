@@ -6,12 +6,12 @@ import Evalso.Cruncher.Language (Language (..))
 
 lua :: Language
 lua = Language {
-    codeFilename = "program.lua"
-  , compileCommand = Nothing
-  , compileTimeout = Nothing
-  , runCommand = ["lua", "program.lua"]
-  , runTimeout = 5
-  , codemirror = "lua"
-  , rpm = "lua"
-  , displayName = "Lua"
+    _codeFilename = "program.lua"
+  , _compileCommand = Nothing
+  , _compileTimeout = Nothing
+  , _runCommand = ["lua", "program.lua"]
+  , _runTimeout = 5
+  , _codemirror = "lua"
+  , _rpm = "lua"
+  , _displayName = "Lua"
 }

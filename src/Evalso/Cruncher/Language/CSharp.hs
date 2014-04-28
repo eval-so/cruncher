@@ -6,12 +6,12 @@ import Evalso.Cruncher.Language (Language (..))
 
 csharp :: Language
 csharp = Language {
-    codeFilename = "program.cs"
-  , compileCommand = Just ["mcs", "program.cs"]
-  , compileTimeout = Just 3
-  , runCommand = ["mono", "program.exe"]
-  , runTimeout = 5
-  , codemirror = "clike"
-  , rpm = "mono-core"
-  , displayName = "C#"
+    _codeFilename = "program.cs"
+  , _compileCommand = Just ["mcs", "program.cs"]
+  , _compileTimeout = Just 3
+  , _runCommand = ["mono", "program.exe"]
+  , _runTimeout = 5
+  , _codemirror = "clike"
+  , _rpm = "mono-core"
+  , _displayName = "C#"
 }

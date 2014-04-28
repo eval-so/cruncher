@@ -6,12 +6,12 @@ import Evalso.Cruncher.Language (Language (..))
 
 fsharp :: Language
 fsharp = Language {
-    codeFilename = "program.fs"
-  , compileCommand = Just ["fsharpc", "--nologo", "-o", "a.exe", "program.fs"]
-  , compileTimeout = Just 8
-  , runCommand = ["mono", "a.exe"]
-  , runTimeout = 5
-  , codemirror = "fsharp" -- TODO - Doesn't seem to exist upstream.
-  , rpm = "fsharp"
-  , displayName = "F#"
+    _codeFilename = "program.fs"
+  , _compileCommand = Just ["fsharpc", "--nologo", "-o", "a.exe", "program.fs"]
+  , _compileTimeout = Just 8
+  , _runCommand = ["mono", "a.exe"]
+  , _runTimeout = 5
+  , _codemirror = "fsharp" -- TODO - Doesn't seem to exist upstream.
+  , _rpm = "fsharp"
+  , _displayName = "F#"
 }

@@ -6,12 +6,12 @@ import Evalso.Cruncher.Language (Language (..))
 
 cplusplus :: Language
 cplusplus = Language {
-    codeFilename = "program.cc"
-  , compileCommand = Just ["g++", "-Wall", "program.cc"]
-  , compileTimeout = Just 3
-  , runCommand = ["./a.out"]
-  , runTimeout = 5
-  , codemirror = "clike"
-  , rpm = "gcc-c++"
-  , displayName = "C++"
+    _codeFilename = "program.cc"
+  , _compileCommand = Just ["g++", "-Wall", "program.cc"]
+  , _compileTimeout = Just 3
+  , _runCommand = ["./a.out"]
+  , _runTimeout = 5
+  , _codemirror = "clike"
+  , _rpm = "gcc-c++"
+  , _displayName = "C++"
 }

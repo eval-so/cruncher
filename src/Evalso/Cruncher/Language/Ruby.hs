@@ -6,12 +6,12 @@ import Evalso.Cruncher.Language (Language (..))
 
 ruby :: Language
 ruby = Language {
-    codeFilename = "program.rb"
-  , compileCommand = Nothing
-  , compileTimeout = Nothing
-  , runCommand = ["ruby", "program.rb"]
-  , runTimeout = 5
-  , codemirror = "ruby"
-  , rpm = "ruby"
-  , displayName = "Ruby"
+    _codeFilename = "program.rb"
+  , _compileCommand = Nothing
+  , _compileTimeout = Nothing
+  , _runCommand = ["ruby", "program.rb"]
+  , _runTimeout = 5
+  , _codemirror = "ruby"
+  , _rpm = "ruby"
+  , _displayName = "Ruby"
 }

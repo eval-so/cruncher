@@ -6,12 +6,12 @@ import Evalso.Cruncher.Language (Language (..))
 
 java :: Language
 java = Language {
-    codeFilename = "EvalSO.java"
-  , compileCommand = Just ["javac", "EvalSO.java"]
-  , compileTimeout = Just 10
-  , runCommand = ["java", "EvalSO"]
-  , runTimeout = 10
-  , codemirror = "java"
-  , rpm = "java-devel"
-  , displayName = "Java"
+    _codeFilename = "EvalSO.java"
+  , _compileCommand = Just ["javac", "EvalSO.java"]
+  , _compileTimeout = Just 10
+  , _runCommand = ["java", "EvalSO"]
+  , _runTimeout = 10
+  , _codemirror = "java"
+  , _rpm = "java-devel"
+  , _displayName = "Java"
 }

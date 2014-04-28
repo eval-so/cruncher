@@ -6,12 +6,12 @@ import Evalso.Cruncher.Language (Language (..))
 
 chickenscheme :: Language
 chickenscheme = Language {
-    codeFilename = "program.scm"
-  , compileCommand = Just ["csc", "-o", "a.out", "program.scm"]
-  , compileTimeout = Just 3
-  , runCommand = ["./a.out"]
-  , runTimeout = 5
-  , codemirror = "scheme"
-  , rpm = "chicken"
-  , displayName = "Chicken Scheme"
+    _codeFilename = "program.scm"
+  , _compileCommand = Just ["csc", "-o", "a.out", "program.scm"]
+  , _compileTimeout = Just 3
+  , _runCommand = ["./a.out"]
+  , _runTimeout = 5
+  , _codemirror = "scheme"
+  , _rpm = "chicken"
+  , _displayName = "Chicken Scheme"
 }

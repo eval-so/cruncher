@@ -6,12 +6,12 @@ import Evalso.Cruncher.Language (Language (..))
 
 smalltalk :: Language
 smalltalk = Language {
-    codeFilename = "program.st"
-  , compileCommand = Nothing
-  , compileTimeout = Nothing
-  , runCommand = ["gst", "program.st"]
-  , runTimeout = 5
-  , codemirror = "smalltalk"
-  , rpm = "gnu-smalltalk"
-  , displayName = "Smalltalk"
+    _codeFilename = "program.st"
+  , _compileCommand = Nothing
+  , _compileTimeout = Nothing
+  , _runCommand = ["gst", "program.st"]
+  , _runTimeout = 5
+  , _codemirror = "smalltalk"
+  , _rpm = "gnu-smalltalk"
+  , _displayName = "Smalltalk"
 }

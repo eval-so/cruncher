@@ -6,12 +6,12 @@ import Evalso.Cruncher.Language (Language (..))
 
 go :: Language
 go = Language {
-    codeFilename = "program.go"
-  , compileCommand = Just ["go", "build", "program.go"]
-  , compileTimeout = Just 3
-  , runCommand = ["./program"]
-  , runTimeout = 5
-  , codemirror = "go"
-  , rpm = "golang"
-  , displayName = "Go"
+    _codeFilename = "program.go"
+  , _compileCommand = Just ["go", "build", "program.go"]
+  , _compileTimeout = Just 3
+  , _runCommand = ["./program"]
+  , _runTimeout = 5
+  , _codemirror = "go"
+  , _rpm = "golang"
+  , _displayName = "Go"
 }

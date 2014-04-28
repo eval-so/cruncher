@@ -6,12 +6,12 @@ import Evalso.Cruncher.Language (Language (..))
 
 php :: Language
 php = Language {
-    codeFilename = "program.php"
-  , compileCommand = Nothing
-  , compileTimeout = Nothing
-  , runCommand = ["php", "program.php"]
-  , runTimeout = 5
-  , codemirror = "php"
-  , rpm = "php"
-  , displayName = "PHP"
+    _codeFilename = "program.php"
+  , _compileCommand = Nothing
+  , _compileTimeout = Nothing
+  , _runCommand = ["php", "program.php"]
+  , _runTimeout = 5
+  , _codemirror = "php"
+  , _rpm = "php"
+  , _displayName = "PHP"
 }
