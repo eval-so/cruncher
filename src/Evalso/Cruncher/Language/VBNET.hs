@@ -13,5 +13,5 @@ vbnet = Language {
   , _runTimeout = 5
   , _codemirror = "vbnet"
   , _rpm = "mono-basic"
-  , _displayName = "VBNET"
+  , _displayName = "VB.NET"
 }

@@ -197,11 +197,11 @@ spec = do
           c        = FR.compile finalResult
       stdout e `shouldBe` "hello world!\n"
       c `shouldBe` Nothing
-{-
-    it "works for VBNET" $ do
+
+    it "works for VB.NET" $ do
       finalResult <- runRequest $ Request "vbnet" "Module HelloWorld\nSub Main()\nConsole.WriteLine(\"hello world!\")\nEnd Sub\nEnd Module" Nothing False Nothing
       let (Just e) = FR.run finalResult
           (Just c) = FR.compile finalResult
       stdout e `shouldBe` "hello world!\n"
       stderr c `shouldBe` ""
--}
+
