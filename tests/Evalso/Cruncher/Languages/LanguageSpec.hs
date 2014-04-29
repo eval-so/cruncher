@@ -176,14 +176,14 @@ spec = do
       stdout e `shouldBe` "hello world!\n"
       stderr c `shouldBe` ""
 -}
-{-
+
     it "works for SML" $ do
-      finalResult <- runRequest $ Request "sml" "print \"hello world!\n\";" Nothing False Nothing
+      finalResult <- runRequest $ Request "sml" "print \"hello world!\\n\";" Nothing False Nothing
       let (Just e) = FR.run finalResult
           (Just c) = FR.compile finalResult
       stdout e `shouldBe` "hello world!\n"
       stderr c `shouldBe` ""
--}
+
     it "works for Scala" $ do
       finalResult <- runRequest $ Request "scala" "object EvalSO extends App { println(\"hello world!\") }" Nothing False Nothing
       let (Just e) = FR.run finalResult
