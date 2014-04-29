@@ -8,7 +8,7 @@ import Evalso.Cruncher.SELinux
 import Test.Hspec
 
 spec :: Spec
-spec = parallel $ do
+spec = do
   describe "Sandboxed evaluation" $ do
     it "works for C++" $ do
       finalResult <- runRequest $ Request "c++" "#include <iostream>\nusing namespace std; int main() { cout << \"hello world!\" << endl; }" Nothing False Nothing
