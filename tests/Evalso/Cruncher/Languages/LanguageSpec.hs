@@ -73,14 +73,13 @@ spec = do
           c        = FR.compile finalResult
       stdout e `shouldBe` "hello world!\n"
       c `shouldBe` Nothing
-
+-}
     it "works for Clojure" $ do
       finalResult <- runRequest $ Request "clojure" "(print \"hello world!\")" Nothing False Nothing
       let (Just e) = FR.run finalResult
           c        = FR.compile finalResult
       stdout e `shouldBe` "hello world!\n"
       c `shouldBe` Nothing
--}
 
     it "works for F#" $ do
       finalResult <- runRequest $ Request "fsharp" "printfn \"hello world!\"" Nothing False Nothing
