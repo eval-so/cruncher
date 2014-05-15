@@ -22,6 +22,7 @@ library
     Evalso.Cruncher.Language.C
     Evalso.Cruncher.Language.ChickenScheme
     Evalso.Cruncher.Language.Clojure
+    Evalso.Cruncher.Language.CoffeeScript
     Evalso.Cruncher.Language.CPlusPlus
     Evalso.Cruncher.Language.CSharp
     Evalso.Cruncher.Language.Elixir

@@ -19,6 +19,7 @@ import Evalso.Cruncher.Language.C as L
 import Evalso.Cruncher.Language.ChickenScheme as L
 import Evalso.Cruncher.Language.CPlusPlus as L
 import Evalso.Cruncher.Language.Clojure as L
+import Evalso.Cruncher.Language.CoffeeScript as L
 import Evalso.Cruncher.Language.CSharp as L
 import Evalso.Cruncher.Language.Elixir as L
 import Evalso.Cruncher.Language.Factor as L
@@ -54,6 +55,7 @@ languages = Map.fromList
   , ("c", c)
   , ("chickenscheme", chickenscheme)
   , ("clojure", clojure)
+  , ("coffeescript", coffeescript)
   , ("csharp", csharp)
   , ("elixir", elixir)
   , ("factor", factor)
