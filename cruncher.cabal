@@ -33,6 +33,7 @@ library
     Evalso.Cruncher.Language.Idris
     Evalso.Cruncher.Language.Io
     Evalso.Cruncher.Language.Java
+    Evalso.Cruncher.Language.JavaScript
     Evalso.Cruncher.Language.JRuby18
     Evalso.Cruncher.Language.LOLCODE
     Evalso.Cruncher.Language.Lua

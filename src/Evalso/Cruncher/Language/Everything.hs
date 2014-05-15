@@ -29,6 +29,7 @@ import Evalso.Cruncher.Language.Haskell as L
 import Evalso.Cruncher.Language.Idris as L
 import Evalso.Cruncher.Language.Io as L
 import Evalso.Cruncher.Language.Java as L
+import Evalso.Cruncher.Language.JavaScript as L
 import Evalso.Cruncher.Language.JRuby18 as L
 import Evalso.Cruncher.Language.LOLCODE as L
 import Evalso.Cruncher.Language.Lua as L
@@ -65,6 +66,7 @@ languages = Map.fromList
   , ("idris", idris)
   , ("io", io)
   , ("java", java)
+  , ("javascript", javascript)
   , ("jruby18", jruby18)
   , ("lolcode", lolcode)
   , ("lua", lua)

@@ -131,6 +131,13 @@ spec = do
       stdout e `shouldBe` "hello world!\n"
       c `shouldBe` Nothing
 
+    it "works for JavaScript" $ do
+      finalResult <- runRequest $ Request "javascript" "console.log(\"Hello world\");" Nothing False Nothing
+      let (Just e) = FR.run finalResult
+          c        = FR.compile finalResult
+      stdout e `shouldBe` "hello world!\n"
+      c `shouldBe` Nothing
+
     it "works for Java" $ do
       finalResult <- runRequest $ Request "java" "public class EvalSO { public static void main(String[] args) { System.out.println(\"hello world!\"); } }" Nothing False Nothing
       let (Just e) = FR.run finalResult
