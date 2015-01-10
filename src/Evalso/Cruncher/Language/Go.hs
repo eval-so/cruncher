@@ -12,6 +12,6 @@ go = Language {
   , _runCommand = ["./program"]
   , _runTimeout = 5
   , _codemirror = "go"
-  , _rpm = "golang"
+  , _rpm = "go"
   , _displayName = "Go"
 }
